@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>OUTR PYQ Hub</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #172033;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #ffffff;
+      padding: 28px 20px 22px;
+      text-align: center;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    header h1 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    header p {
+      color: #667085;
+      font-size: 14px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .search-box {
+      background: white;
+      padding: 16px;
+      border-radius: 14px;
+      margin-bottom: 18px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #d8dde7;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    .search-box input:focus {
+      border-color: #667eea;
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #d8dde7;
+      border-radius: 10px;
+      background: white;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 18px;
+      margin-bottom: 14px;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .details {
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 11px 15px;
+      border-radius: 9px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .view {
+      background: #172033;
+      color: white;
+    }
+
+    .download {
+      background: #eef2ff;
+      color: #3730a3;
+    }
+
+    .status {
+      text-align: center;
+      padding: 30px;
+      color: #667085;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #667085;
+      font-size: 13px;
+    }
+
+    footer strong {
+      color: #172033;
+    }
+
+    @media (max-width: 650px) {
+      header h1 {
+        font-size: 24px;
+      }
+
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>OUTR PYQ HUB</h1>
+  <p>Previous Year Questions • OUTR Students</p>
+</header>
+
+<div class="container">
+
+  <div class="search-box">
+    <input
+      type="text"
+      id="search"
+      placeholder="🔎 Search subject, year or exam..."
+      oninput="filterPYQs()"
+    >
+  </div>
+
+  <div class="filters">
+
+    <select id="semester" onchange="filterPYQs()">
+      <option value="">All Semesters</option>
+      <option value="1">1st Semester</option>
+      <option value="2">2nd Semester</option>
+      <option value="3">3rd Semester</option>
+      <option value="4">4th Semester</option>
+      <option value="5">5th Semester</option>
+      <option value="6">6th Semester</option>
+      <option value="7">7th Semester</option>
+      <option value="8">8th Semester</option>
+    </select>
+
+    <select id="exam" onchange="filterPYQs()">
+      <option value="">All Exams</option>
+      <option value="Mid Term">Mid Term</option>
+      <option value="End Semester">End Semester</option>
+    </select>
+
+    <select id="year" onchange="filterPYQs()">
+      <option value="">All Years</option>
+      <option value="2026">2026</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+      <option value="2022">2022</option>
+    </select>
+
+  </div>
+
+  <div id="results" class="status">
+    Loading PYQs...
+  </div>
+
+</div>
+
+<footer>
+  <strong>Made by Ritesh Mallik</strong><br>
+  Civil • OUTR
+</footer>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://qxomkkmdpixjlbvyacjs.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_1OEksUcpmU78oj6vkW9keQ_oZUqXh7H";
+
+const BUCKET =
+  "PYQS Pdfs";
+
+let allPYQs = [];
+
+
+/* Load PYQs from Supabase */
+
+async function loadPYQs() {
+
+  const results = document.getElementById("results");
+
+  try {
+
+    const response = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/pyqs?select=*&order=year.desc",
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Could not load PYQs");
+    }
+
+    allPYQs = await response.json();
+
+    filterPYQs();
+
+  } catch (error) {
+
+    console.error(error);
+
+    results.innerHTML =
+      "❌ Unable to load PYQs.<br>Please try again later.";
+
+  }
+}
+
+
+/* Filter PYQs */
+
+function filterPYQs() {
+
+  const search =
+    document.getElementById("search").value
+      .toLowerCase()
+      .trim();
+
+  const semester =
+    document.getElementById("semester").value;
+
+  const exam =
+    document.getElementById("exam").value;
+
+  const year =
+    document.getElementById("year").value;
+
+  const filtered = allPYQs.filter(pyq => {
+
+    const text =
+      (
+        pyq.subject +
+        " " +
+        pyq.title +
+        " " +
+        pyq.exam_type +
+        " " +
+        pyq.year
+      ).toLowerCase();
+
+    return (
+      (!search || text.includes(search)) &&
+      (!semester || String(pyq.semester) === semester) &&
+      (!exam || pyq.exam_type === exam) &&
+      (!year || String(pyq.year) === year)
+    );
+
+  });
+
+  displayPYQs(filtered);
+}
+
+
+/* Display PYQs */
+
+function displayPYQs(pyqs) {
+
+  const results =
+    document.getElementById("results");
+
+  if (pyqs.length === 0) {
+
+    results.innerHTML =
+      "📭 No PYQs found.";
+
+    return;
+  }
+
+  results.innerHTML = pyqs.map(pyq => {
+
+    const fileURL =
+      SUPABASE_URL +
+      "/storage/v1/object/public/" +
+      encodeURIComponent(BUCKET) +
+      "/" +
+      pyq.file_path
+        .split("/")
+        .map(encodeURIComponent)
+        .join("/");
+
+    return `
+
+      <div class="card">
+
+        <h2>📄 ${escapeHTML(pyq.title)}</h2>
+
+        <div class="details">
+          🏗️ ${escapeHTML(pyq.branch)}
+          &nbsp; • &nbsp;
+          📚 Semester ${pyq.semester}
+          <br>
+
+          📖 ${escapeHTML(pyq.subject)}
+          <br>
+
+          📝 ${escapeHTML(pyq.exam_type)}
+          &nbsp; • &nbsp;
+          📅 ${pyq.year}
+        </div>
+
+        <div class="buttons">
+
+          <a
+            class="btn view"
+            href="${fileURL}"
+            target="_blank"
+          >
+            📖 View PDF
+          </a>
+
+          <a
+            class="btn download"
+            href="${fileURL}"
+            download
+          >
+            ⬇️ Download
+          </a>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* Basic HTML protection */
+
+function escapeHTML(text) {
+
+  return String(text)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
+}
+
+
+/* Start */
+
+loadPYQs();
+
+</script>
+
+</body>
+  </html>
