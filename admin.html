@@ -1,0 +1,3362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OUTR PYQ HUB • Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+  min-height:100vh;
+}
+
+button,input,select{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+header{
+  background:white;
+  border-bottom:1px solid #e5e7eb;
+  padding:24px 18px;
+  text-align:center;
+}
+
+.logo{
+  font-size:27px;
+  font-weight:800;
+}
+
+.subtitle{
+  margin-top:6px;
+  color:#667085;
+  font-size:13px;
+}
+
+.container{
+  width:100%;
+  max-width:1000px;
+  margin:auto;
+  padding:20px 15px 45px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 4px 16px rgba(0,0,0,.05);
+}
+
+h2{
+  font-size:20px;
+  margin-bottom:17px;
+}
+
+h3{
+  font-size:17px;
+  margin-bottom:12px;
+}
+
+label{
+  display:block;
+  margin:14px 0 7px;
+  font-size:13px;
+  font-weight:700;
+}
+
+input,
+select{
+  width:100%;
+  padding:13px 14px;
+  border:1px solid #d7dce5;
+  border-radius:11px;
+  background:white;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#4f46e5;
+}
+
+button{
+  border:0;
+  border-radius:11px;
+  padding:13px 16px;
+  font-weight:700;
+}
+
+.primary{
+  width:100%;
+  background:#172033;
+  color:white;
+  margin-top:18px;
+}
+
+.secondary{
+  background:#eef2ff;
+  color:#3730a3;
+}
+
+.danger{
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.success-btn{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.logout{
+  width:100%;
+  background:#fee2e2;
+  color:#b91c1c;
+}
+
+.message{
+  padding:13px;
+  border-radius:10px;
+  margin-top:14px;
+  font-size:13px;
+  line-height:1.5;
+}
+
+.success{
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.info{
+  background:#eef2ff;
+  color:#3730a3;
+}
+
+/* LOGIN */
+
+.login-card{
+  max-width:480px;
+  margin:45px auto;
+}
+
+/* DASHBOARD */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.stat{
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+}
+
+.stat-number{
+  font-size:25px;
+  font-weight:800;
+}
+
+.stat-label{
+  color:#667085;
+  font-size:12px;
+  margin-top:5px;
+}
+
+/* NAV */
+
+.admin-nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.nav-btn{
+  background:white;
+  border:1px solid #e5e7eb;
+  color:#172033;
+}
+
+.nav-btn.active{
+  background:#172033;
+  color:white;
+}
+
+/* FORM */
+
+.two-col{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+/* PAPERS */
+
+.search{
+  margin-bottom:15px;
+}
+
+.paper{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:11px;
+}
+
+.paper-title{
+  font-weight:700;
+  font-size:16px;
+  margin-bottom:7px;
+}
+
+.paper-info{
+  color:#667085;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.actions button,
+.actions a{
+  flex:1;
+  text-align:center;
+  text-decoration:none;
+}
+
+.view{
+  background:#172033;
+  color:white;
+  border-radius:10px;
+  padding:12px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.edit{
+  background:#eef2ff;
+  color:#3730a3;
+}
+
+.branch-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 0;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.branch-name{
+  font-weight:700;
+}
+
+.branch-status{
+  font-size:12px;
+  color:#667085;
+  margin-top:4px;
+}
+
+.branch-actions{
+  display:flex;
+  gap:7px;
+}
+
+/* MAINTENANCE */
+
+.status-box{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:17px;
+  background:#f8fafc;
+}
+
+.status-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.status-title{
+  font-weight:800;
+}
+
+.status-desc{
+  color:#667085;
+  font-size:12px;
+  margin-top:5px;
+}
+
+.toggle{
+  position:relative;
+  width:52px;
+  height:29px;
+  flex:none;
+}
+
+.toggle input{
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.slider{
+  position:absolute;
+  inset:0;
+  background:#cbd5e1;
+  border-radius:30px;
+  transition:.2s;
+}
+
+.slider:before{
+  content:"";
+  position:absolute;
+  width:23px;
+  height:23px;
+  left:3px;
+  top:3px;
+  background:white;
+  border-radius:50%;
+  transition:.2s;
+}
+
+.toggle input:checked + .slider{
+  background:#16a34a;
+}
+
+.toggle input:checked + .slider:before{
+  transform:translateX(23px);
+}
+
+/* EMPTY */
+
+.empty{
+  padding:28px;
+  text-align:center;
+  color:#667085;
+  background:#f8fafc;
+  border-radius:12px;
+}
+
+/* FOOTER */
+
+footer{
+  background:white;
+  border-top:1px solid #e5e7eb;
+  text-align:center;
+  color:#667085;
+  padding:30px 15px;
+  font-size:13px;
+}
+
+footer strong{
+  color:#172033;
+}
+
+@media(max-width:700px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .admin-nav{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .two-col{
+    grid-template-columns:1fr;
+  }
+
+  .branch-row{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .branch-actions{
+    width:100%;
+  }
+
+  .branch-actions button{
+    flex:1;
+  }
+}
+
+@media(max-width:450px){
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .actions{
+    flex-direction:column;
+  }
+
+  .admin-nav{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🔐 OUTR PYQ HUB</div>
+  <div class="subtitle">Admin Panel • Manage Your PYQ Hub</div>
+</header>
+
+<div class="container">
+
+<!-- LOGIN -->
+
+<section id="loginSection" class="card login-card">
+
+  <h2>🔐 Admin Login</h2>
+
+  <label>Email</label>
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Admin email"
+  >
+
+  <label>Password</label>
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Password"
+  >
+
+  <button class="primary" onclick="login()">
+    🔑 Login
+  </button>
+
+  <div id="loginMessage" class="hidden"></div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="adminSection" class="hidden">
+
+  <!-- NAV -->
+
+  <div class="admin-nav">
+
+    <button
+      class="nav-btn active"
+      onclick="showTab('dashboardTab',this)">
+      📊 Dashboard
+    </button>
+
+    <button
+      class="nav-btn"
+      onclick="showTab('pyqTab',this)">
+      📚 PYQs
+    </button>
+
+    <button
+      class="nav-btn"
+      onclick="showTab('branchTab',this)">
+      🏫 Branches
+    </button>
+
+    <button
+      class="nav-btn"
+      onclick="showTab('settingsTab',this)">
+      ⚙️ Website
+    </button>
+
+  </div>
+
+
+  <!-- DASHBOARD -->
+
+  <div id="dashboardTab">
+
+    <div class="card">
+
+      <h2>📊 Dashboard</h2>
+
+      <div class="stats">
+
+        <div class="stat">
+          <div id="totalPYQs" class="stat-number">0</div>
+          <div class="stat-label">Total PYQs</div>
+        </div>
+
+        <div class="stat">
+          <div id="totalBranches" class="stat-number">0</div>
+          <div class="stat-label">Branches</div>
+        </div>
+
+        <div class="stat">
+          <div id="totalYears" class="stat-number">0</div>
+          <div class="stat-label">PYQ Years</div>
+        </div>
+
+        <div class="stat">
+          <div id="totalSubjects" class="stat-number">0</div>
+          <div class="stat-label">Subjects</div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🆕 Recent PYQs</h2>
+
+      <div id="dashboardRecent">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- PYQ TAB -->
+
+  <div id="pyqTab" class="hidden">
+
+    <div class="card">
+
+      <h2 id="formTitle">
+        ➕ Add New PYQ
+      </h2>
+
+
+      <label>Branch</label>
+
+      <select id="branch">
+        <option value="">Select Branch</option>
+      </select>
+
+
+      <label>Academic Year</label>
+
+      <select
+        id="academicYear"
+        onchange="updateSemesters()">
+
+        <option value="">
+          Select Academic Year
+        </option>
+
+        <option value="1">
+          1st Year
+        </option>
+
+        <option value="2">
+          2nd Year
+        </option>
+
+        <option value="3">
+          3rd Year
+        </option>
+
+        <option value="4">
+          4th Year
+        </option>
+
+      </select>
+
+
+      <label>Semester</label>
+
+      <select id="semester">
+
+        <option value="">
+          Select Academic Year First
+        </option>
+
+      </select>
+
+
+      <label>Subject</label>
+
+      <input
+        id="subject"
+        type="text"
+        placeholder="e.g. Mathematics-I"
+      >
+
+
+      <label>Subject Code</label>
+
+      <input
+        id="subjectCode"
+        type="text"
+        placeholder="e.g. MATH-I"
+      >
+
+
+      <label>Exam Type</label>
+
+      <select id="examType">
+
+        <option value="End Term">
+          End Term
+        </option>
+
+        <option value="Mid Term">
+          Mid Term
+        </option>
+
+        <option value="Special End Term">
+          Special End Term
+        </option>
+
+        <option value="Compensatory Mid Term">
+          Compensatory Mid Term
+        </option>
+
+      </select>
+
+
+      <label>PYQ Year</label>
+
+      <input
+        id="year"
+        type="number"
+        min="2000"
+        max="2100"
+        placeholder="2025"
+      >
+
+
+      <label>Title</label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="END TERM Mathematics-I 2025"
+      >
+
+
+      <label id="fileLabel">
+        PDF File
+      </label>
+
+      <input
+        id="pdfFile"
+        type="file"
+        accept="application/pdf"
+      >
+
+
+      <div
+        id="currentFile"
+        class="hidden">
+      </div>
+
+
+      <button
+        id="saveButton"
+        class="primary"
+        onclick="savePYQ()">
+
+        ⬆️ Upload PYQ
+
+      </button>
+
+
+      <button
+        id="cancelButton"
+        class="secondary hidden"
+        style="width:100%;margin-top:10px;"
+        onclick="cancelEdit()">
+
+        Cancel Edit
+
+      </button>
+
+
+      <div
+        id="formMessage"
+        class="hidden">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>📚 Manage PYQs</h2>
+
+      <input
+        id="adminSearch"
+        class="search"
+        type="text"
+        placeholder="🔎 Search branch, subject, year, exam..."
+        oninput="filterPYQs()"
+      >
+
+      <div id="adminList">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- BRANCH TAB -->
+
+  <div id="branchTab" class="hidden">
+
+    <div class="card">
+
+      <h2>🏫 Branch Management</h2>
+
+      <label>Branch Name</label>
+
+      <input
+        id="newBranchName"
+        type="text"
+        placeholder="e.g. Civil Engineering"
+      >
+
+      <label>Branch Code</label>
+
+      <input
+        id="newBranchCode"
+        type="text"
+        placeholder="e.g. CIVIL"
+      >
+
+      <button
+        id="branchSaveButton"
+        class="primary"
+        onclick="saveBranch()">
+
+        ➕ Add Branch
+
+      </button>
+
+      <button
+        id="branchCancelButton"
+        class="secondary hidden"
+        style="width:100%;margin-top:10px;"
+        onclick="cancelBranchEdit()">
+
+        Cancel Edit
+
+      </button>
+
+      <div
+        id="branchMessage"
+        class="hidden">
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <h2>🌿 Your Branches</h2>
+
+      <div id="branchList">
+        <div class="empty">Loading...</div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- SETTINGS -->
+
+  <div id="settingsTab" class="hidden">
+
+    <div class="card">
+
+      <h2>⚙️ Website Control</h2>
+
+      <div class="status-box">
+
+        <div class="status-line">
+
+          <div>
+            <div class="status-title">
+              Website Status
+            </div>
+
+            <div
+              id="statusDescription"
+              class="status-desc">
+              Loading...
+            </div>
+          </div>
+
+          <label class="toggle">
+
+            <input
+              id="maintenanceToggle"
+              type="checkbox"
+              onchange="toggleMaintenance()"
+            >
+
+            <span class="slider"></span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+
+      <label>
+        Maintenance Message
+      </label>
+
+      <input
+        id="maintenanceMessage"
+        type="text"
+        placeholder="Website is under maintenance. Please check again later."
+      >
+
+      <button
+        class="primary"
+        onclick="saveMaintenanceMessage()">
+
+        💾 Save Message
+
+      </button>
+
+      <div
+        id="settingsMessage"
+        class="hidden">
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <button
+    class="logout"
+    onclick="logout()">
+
+    🚪 Logout
+
+  </button>
+
+</section>
+
+</div>
+
+
+<footer>
+
+  <strong>Made by Ritesh Mallik</strong>
+
+  <br>
+
+  Civil • OUTR
+
+</footer>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+"https://qxomkkmdpixjlbvyacjs.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_1OEksUcpmU78oj6vkW9keQ_oZUqXh7H";
+
+const BUCKET =
+"PYQS Pdfs";
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+let pyqs = [];
+let branches = [];
+
+let editingId = null;
+let editingBranchId = null;
+
+
+/* =====================================================
+   SUPABASE REQUEST
+===================================================== */
+
+async function supabaseRequest(
+  endpoint,
+  options={}
+){
+
+  const token =
+    localStorage.getItem(
+      "outr_access_token"
+    );
+
+  const headers = {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer "+
+      (token || SUPABASE_KEY),
+
+    ...(options.headers || {})
+
+  };
+
+  return fetch(
+    SUPABASE_URL+
+    endpoint,
+    {
+      ...options,
+      headers
+    }
+  );
+
+}
+
+
+/* =====================================================
+   LOGIN
+===================================================== */
+
+async function login(){
+
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
+
+  if(!email || !password){
+
+    showMessage(
+      "loginMessage",
+      "❌ Enter email and password.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL+
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              SUPABASE_KEY
+          },
+
+          body:
+            JSON.stringify({
+              email,
+              password
+            })
+        }
+      );
+
+    const data =
+      await response.json();
+
+    if(!response.ok){
+
+      throw new Error(
+        data.error_description ||
+        data.message ||
+        "Login failed."
+      );
+
+    }
+
+    localStorage.setItem(
+      "outr_access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "outr_refresh_token",
+      data.refresh_token
+    );
+
+    showAdmin();
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "loginMessage",
+      "❌ "+
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   SHOW ADMIN
+===================================================== */
+
+function showAdmin(){
+
+  document
+    .getElementById("loginSection")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminSection")
+    .classList.remove("hidden");
+
+  loadAll();
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+  localStorage.removeItem(
+    "outr_access_token"
+  );
+
+  localStorage.removeItem(
+    "outr_refresh_token"
+  );
+
+  location.reload();
+
+}
+
+
+/* =====================================================
+   LOAD EVERYTHING
+===================================================== */
+
+async function loadAll(){
+
+  await Promise.all([
+    loadBranches(),
+    loadPYQs()
+  ]);
+
+  updateDashboard();
+  loadMaintenance();
+
+}
+
+
+/* =====================================================
+   BRANCHES
+===================================================== */
+
+async function loadBranches(){
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/branches?select=*&order=id.asc"
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+    branches =
+      await response.json();
+
+    displayBranches();
+    populateBranchSelect();
+
+  }catch(error){
+
+    console.error(error);
+
+    document
+      .getElementById("branchList")
+      .innerHTML =
+      `<div class="message error">
+        ❌ Could not load branches.
+        <br>${escapeHTML(error.message)}
+      </div>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   BRANCH SELECT
+===================================================== */
+
+function populateBranchSelect(){
+
+  const select =
+    document.getElementById(
+      "branch"
+    );
+
+  const old =
+    select.value;
+
+  select.innerHTML =
+    `<option value="">
+      Select Branch
+    </option>`+
+    branches
+      .map(
+        b => {
+
+          const name =
+            b.name ||
+            b.branch ||
+            b.branch_name ||
+            "";
+
+          const id =
+            b.id;
+
+          return `
+            <option value="${escapeHTML(String(id))}">
+              ${escapeHTML(name)}
+            </option>
+          `;
+
+        }
+      )
+      .join("");
+
+  if(old){
+    select.value=old;
+  }
+
+}
+
+
+/* =====================================================
+   DISPLAY BRANCHES
+===================================================== */
+
+function displayBranches(){
+
+  const list =
+    document.getElementById(
+      "branchList"
+    );
+
+  if(!branches.length){
+
+    list.innerHTML =
+      `<div class="empty">
+        No branches found.
+      </div>`;
+
+    return;
+
+  }
+
+  list.innerHTML =
+    branches
+      .map(
+        b => {
+
+          const name =
+            b.name ||
+            b.branch ||
+            b.branch_name ||
+            "Unnamed Branch";
+
+          const code =
+            b.code ||
+            b.branch_code ||
+            "";
+
+          const active =
+            b.active !== false &&
+            b.is_active !== false;
+
+          return `
+
+            <div class="branch-row">
+
+              <div>
+
+                <div class="branch-name">
+                  🏫
+                  ${escapeHTML(name)}
+                  ${code
+                    ? " • "+
+                      escapeHTML(code)
+                    : ""}
+                </div>
+
+                <div class="branch-status">
+                  ${active
+                    ? "🟢 Active"
+                    : "🔴 Disabled"}
+                </div>
+
+              </div>
+
+              <div class="branch-actions">
+
+                <button
+                  class="secondary"
+                  onclick="editBranch(${Number(b.id)})">
+
+                  ✏️ Edit
+
+                </button>
+
+                <button
+                  class="danger"
+                  onclick="deleteBranch(${Number(b.id)})">
+
+                  🗑️ Delete
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =====================================================
+   SAVE BRANCH
+===================================================== */
+
+async function saveBranch(){
+
+  const name =
+    document
+      .getElementById("newBranchName")
+      .value
+      .trim();
+
+  const code =
+    document
+      .getElementById("newBranchCode")
+      .value
+      .trim();
+
+  if(!name){
+
+    showMessage(
+      "branchMessage",
+      "❌ Enter branch name.",
+      "error"
+    );
+
+    return;
+
+  }
+
+  try{
+
+    let data;
+
+    if(editingBranchId){
+
+      data = {
+        name:name
+      };
+
+      if(hasBranchColumn("code")){
+        data.code=code || null;
+      }
+
+      if(hasBranchColumn("branch_code")){
+        data.branch_code=code || null;
+      }
+
+      const response =
+        await supabaseRequest(
+          "/rest/v1/branches?id=eq."+
+          encodeURIComponent(
+            editingBranchId
+          ),
+          {
+            method:"PATCH",
+
+            headers:{
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=representation"
+            },
+
+            body:
+              JSON.stringify(data)
+          }
+        );
+
+      if(!response.ok){
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+      showMessage(
+        "branchMessage",
+        "✅ Branch updated.",
+        "success"
+      );
+
+    }else{
+
+      data = {
+        name:name
+      };
+
+      if(code){
+
+        if(hasBranchColumn("code")){
+          data.code=code;
+        }else if(
+          hasBranchColumn("branch_code")
+        ){
+          data.branch_code=code;
+        }
+
+      }
+
+      if(hasBranchColumn("active")){
+        data.active=true;
+      }
+
+      if(hasBranchColumn("is_active")){
+        data.is_active=true;
+      }
+
+      const response =
+        await supabaseRequest(
+          "/rest/v1/branches",
+          {
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=representation"
+            },
+
+            body:
+              JSON.stringify(data)
+          }
+        );
+
+      if(!response.ok){
+
+        throw new Error(
+          await response.text()
+        );
+
+      }
+
+      showMessage(
+        "branchMessage",
+        "✅ Branch added successfully.",
+        "success"
+      );
+
+    }
+
+    cancelBranchEdit();
+    await loadBranches();
+    updateDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "branchMessage",
+      "❌ "+
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   BRANCH COLUMN HELPER
+===================================================== */
+
+function hasBranchColumn(column){
+
+  if(!branches.length){
+    return column==="name";
+  }
+
+  return branches.some(
+    b =>
+      Object.prototype
+        .hasOwnProperty
+        .call(b,column)
+  );
+
+}
+
+
+/* =====================================================
+   EDIT BRANCH
+===================================================== */
+
+function editBranch(id){
+
+  const branch =
+    branches.find(
+      b =>
+        Number(b.id)===Number(id)
+    );
+
+  if(!branch){
+    alert("Branch not found.");
+    return;
+  }
+
+  editingBranchId =
+    Number(id);
+
+  document
+    .getElementById("newBranchName")
+    .value =
+      branch.name ||
+      branch.branch ||
+      branch.branch_name ||
+      "";
+
+  document
+    .getElementById("newBranchCode")
+    .value =
+      branch.code ||
+      branch.branch_code ||
+      "";
+
+  document
+    .getElementById("branchSaveButton")
+    .textContent =
+      "💾 Update Branch";
+
+  document
+    .getElementById("branchCancelButton")
+    .classList.remove(
+      "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   CANCEL BRANCH
+===================================================== */
+
+function cancelBranchEdit(){
+
+  editingBranchId=null;
+
+  document
+    .getElementById("newBranchName")
+    .value="";
+
+  document
+    .getElementById("newBranchCode")
+    .value="";
+
+  document
+    .getElementById("branchSaveButton")
+    .textContent =
+      "➕ Add Branch";
+
+  document
+    .getElementById("branchCancelButton")
+    .classList.add(
+      "hidden"
+    );
+
+}
+
+
+/* =====================================================
+   DELETE BRANCH
+===================================================== */
+
+async function deleteBranch(id){
+
+  const branch =
+    branches.find(
+      b =>
+        Number(b.id)===Number(id)
+    );
+
+  if(!branch){
+    return;
+  }
+
+  const name =
+    branch.name ||
+    branch.branch ||
+    branch.branch_name ||
+    "this branch";
+
+  if(
+    !confirm(
+      "Delete branch?\n\n"+
+      name+
+      "\n\n"+
+      "This may fail if PYQs are still using this branch."
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/branches?id=eq."+
+        encodeURIComponent(id),
+        {
+          method:"DELETE",
+
+          headers:{
+            "Prefer":
+              "return=representation"
+          }
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+    alert(
+      "✅ Branch deleted."
+    );
+
+    await loadBranches();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Could not delete branch.\n\n"+
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   LOAD PYQS
+===================================================== */
+
+async function loadPYQs(){
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs?select=*&order=year.desc,id.desc"
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        await response.text()
+      );
+
+    }
+
+    pyqs =
+      await response.json();
+
+    displayPYQs(pyqs);
+
+    updateDashboard();
+
+  }catch(error){
+
+    console.error(error);
+
+    document
+      .getElementById("adminList")
+      .innerHTML =
+      `<div class="message error">
+        ❌ Could not load PYQs.
+        <br>${escapeHTML(error.message)}
+      </div>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   ACADEMIC YEAR
+===================================================== */
+
+function updateSemesters(){
+
+  const year =
+    Number(
+      document
+        .getElementById("academicYear")
+        .value
+    );
+
+  const select =
+    document.getElementById(
+      "semester"
+    );
+
+  select.innerHTML =
+    `<option value="">
+      Select Semester
+    </option>`;
+
+  if(!year){
+    return;
+  }
+
+  const first =
+    (year*2)-1;
+
+  const second =
+    year*2;
+
+  select.innerHTML += `
+    <option value="${first}">
+      ${ordinal(first)} Semester
+    </option>
+
+    <option value="${second}">
+      ${ordinal(second)} Semester
+    </option>
+  `;
+
+}
+
+
+/* =====================================================
+   DISPLAY PYQS
+===================================================== */
+
+function displayPYQs(data){
+
+  const list =
+    document.getElementById(
+      "adminList"
+    );
+
+  if(!data.length){
+
+    list.innerHTML =
+      `<div class="empty">
+        📭 No PYQs found.
+      </div>`;
+
+    return;
+  }
+
+  list.innerHTML =
+    data
+      .map(
+        paper => {
+
+          const url =
+            getPDFUrl(
+              paper.file_path
+            );
+
+          return `
+
+            <div class="paper">
+
+              <div class="paper-title">
+                📄
+                ${escapeHTML(
+                  paper.title ||
+                  "Untitled PYQ"
+                )}
+              </div>
+
+              <div class="paper-info">
+
+                🏫
+                ${escapeHTML(
+                  paper.branch || ""
+                )}
+
+                <br>
+
+                📚
+                ${ordinal(
+                  paper.semester
+                )}
+                Semester
+
+                <br>
+
+                📖
+                ${escapeHTML(
+                  paper.subject || ""
+                )}
+
+                ${
+                  paper.subject_code
+                  ? " ("+
+                    escapeHTML(
+                      paper.subject_code
+                    )+
+                    ")"
+                  : ""
+                }
+
+                <br>
+
+                📝
+                ${escapeHTML(
+                  paper.exam_type || ""
+                )}
+
+                •
+                ${escapeHTML(
+                  String(
+                    paper.year || ""
+                  )
+                )}
+
+              </div>
+
+
+              <div class="actions">
+
+                <a
+                  class="view"
+                  href="${url}"
+                  target="_blank">
+
+                  📖 View PDF
+
+                </a>
+
+                <button
+                  class="edit"
+                  onclick="editPYQ(${Number(paper.id)})">
+
+                  ✏️ Edit
+
+                </button>
+
+                <button
+                  class="danger"
+                  onclick="deletePYQ(${Number(paper.id)})">
+
+                  🗑️ Delete
+
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* =====================================================
+   FILTER
+===================================================== */
+
+function filterPYQs(){
+
+  const query =
+    document
+      .getElementById("adminSearch")
+      .value
+      .toLowerCase()
+      .trim();
+
+  if(!query){
+
+    displayPYQs(pyqs);
+    return;
+
+  }
+
+  const results =
+    pyqs.filter(
+      p => {
+
+        const text =
+          [
+            p.branch,
+            p.subject,
+            p.subject_code,
+            p.exam_type,
+            p.year,
+            p.semester,
+            p.title
+          ]
+          .join(" ")
+          .toLowerCase();
+
+        return text.includes(query);
+
+      }
+    );
+
+  displayPYQs(results);
+
+}
+
+
+/* =====================================================
+   EDIT PYQ
+===================================================== */
+
+function editPYQ(id){
+
+  const paper =
+    pyqs.find(
+      p =>
+        Number(p.id)===Number(id)
+    );
+
+  if(!paper){
+
+    alert(
+      "PYQ not found."
+    );
+
+    return;
+  }
+
+  editingId =
+    Number(id);
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+      "✏️ Edit PYQ";
+
+  document
+    .getElementById("branch")
+    .value =
+      findBranchId(
+        paper.branch
+      );
+
+  const academicYear =
+    Math.ceil(
+      Number(paper.semester)/2
+    );
+
+  document
+    .getElementById("academicYear")
+    .value =
+      academicYear;
+
+  updateSemesters();
+
+  document
+    .getElementById("semester")
+    .value =
+      String(paper.semester);
+
+  document
+    .getElementById("subject")
+    .value =
+      paper.subject || "";
+
+  document
+    .getElementById("subjectCode")
+    .value =
+      paper.subject_code || "";
+
+  document
+    .getElementById("examType")
+    .value =
+      paper.exam_type || "End Term";
+
+  document
+    .getElementById("year")
+    .value =
+      paper.year || "";
+
+  document
+    .getElementById("title")
+    .value =
+      paper.title || "";
+
+  document
+    .getElementById("pdfFile")
+    .value="";
+
+  document
+    .getElementById("fileLabel")
+    .textContent =
+      "Replace PDF (optional)";
+
+  const current =
+    document.getElementById(
+      "currentFile"
+    );
+
+  current.className =
+    "message success";
+
+  current.style.display =
+    "block";
+
+  current.innerHTML =
+    "📄 Current PDF: <strong>"+
+    escapeHTML(
+      paper.file_path || ""
+    )+
+    "</strong><br>Leave empty to keep it.";
+
+  document
+    .getElementById("saveButton")
+    .textContent =
+      "💾 Update PYQ";
+
+  document
+    .getElementById("cancelButton")
+    .classList.remove(
+      "hidden"
+    );
+
+  showTab(
+    "pyqTab",
+    document.querySelectorAll(
+      ".nav-btn"
+    )[1]
+  );
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =====================================================
+   CANCEL EDIT
+===================================================== */
+
+function cancelEdit(){
+
+  editingId=null;
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+      "➕ Add New PYQ";
+
+  document
+    .getElementById("saveButton")
+    .textContent =
+      "⬆️ Upload PYQ";
+
+  document
+    .getElementById("cancelButton")
+    .classList.add(
+      "hidden"
+    );
+
+  document
+    .getElementById("fileLabel")
+    .textContent =
+      "PDF File";
+
+  document
+    .getElementById("pdfFile")
+    .value="";
+
+  document
+    .getElementById("currentFile")
+    .className="hidden";
+
+  document
+    .getElementById("subject")
+    .value="";
+
+  document
+    .getElementById("subjectCode")
+    .value="";
+
+  document
+    .getElementById("year")
+    .value="";
+
+  document
+    .getElementById("title")
+    .value="";
+
+}
+
+
+/* =====================================================
+   SAVE PYQ
+===================================================== */
+
+async function savePYQ(){
+
+  const branchId =
+    document
+      .getElementById("branch")
+      .value;
+
+  const semester =
+    Number(
+      document
+        .getElementById("semester")
+        .value
+    );
+
+  const subject =
+    document
+      .getElementById("subject")
+      .value
+      .trim();
+
+  const subjectCode =
+    document
+      .getElementById("subjectCode")
+      .value
+      .trim();
+
+  const examType =
+    document
+      .getElementById("examType")
+      .value;
+
+  const year =
+    Number(
+      document
+        .getElementById("year")
+        .value
+    );
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+  const file =
+    document
+      .getElementById("pdfFile")
+      .files[0];
+
+
+  if(
+    !branchId ||
+    !semester ||
+    !subject ||
+    !year ||
+    !title
+  ){
+
+    showMessage(
+      "formMessage",
+      "❌ Please fill all required fields.",
+      "error"
+    );
+
+    return;
+  }
+
+  if(
+    file &&
+    file.type!=="application/pdf"
+  ){
+
+    showMessage(
+      "formMessage",
+      "❌ Only PDF files are allowed.",
+      "error"
+    );
+
+    return;
+  }
+
+  const branch =
+    branches.find(
+      b =>
+        String(b.id)===String(branchId)
+    );
+
+  const branchName =
+    branch
+      ? (
+          branch.name ||
+          branch.branch ||
+          branch.branch_name ||
+          ""
+        )
+      : "";
+
+  if(!branchName){
+
+    showMessage(
+      "formMessage",
+      "❌ Branch not found.",
+      "error"
+    );
+
+    return;
+  }
+
+  const button =
+    document.getElementById(
+      "saveButton"
+    );
+
+  button.disabled=true;
+
+  try{
+
+    /* ==========================================
+       EDIT
+    ========================================== */
+
+    if(editingId){
+
+      const oldPaper =
+        pyqs.find(
+          p =>
+            Number(p.id)===
+            Number(editingId)
+        );
+
+      if(!oldPaper){
+        throw new Error(
+          "PYQ record not found."
+        );
+      }
+
+      let filePath =
+        oldPaper.file_path;
+
+
+      if(file){
+
+        const newPath =
+          createFilePath(
+            semester,
+            subjectCode,
+            year,
+            file.name
+          );
+
+        const upload =
+          await uploadPDF(
+            file,
+            newPath
+          );
+
+        if(!upload.ok){
+
+          throw new Error(
+            "PDF upload failed: "+
+            await upload.text()
+          );
+
+        }
+
+        filePath =
+          newPath;
+
+        if(oldPaper.file_path){
+
+          await deleteStorageFile(
+            oldPaper.file_path
+          );
+
+        }
+
+      }
+
+
+      const updateData = {
+
+        branch:
+          branchName,
+
+        semester:
+          semester,
+
+        subject:
+          subject,
+
+        subject_code:
+          subjectCode || null,
+
+        year:
+          year,
+
+        exam_type:
+          examType,
+
+        title:
+          title,
+
+        file_path:
+          filePath
+
+      };
+
+
+      const response =
+        await supabaseRequest(
+          "/rest/v1/pyqs?id=eq."+
+          encodeURIComponent(
+            editingId
+          ),
+          {
+            method:"PATCH",
+
+            headers:{
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=representation"
+            },
+
+            body:
+              JSON.stringify(
+                updateData
+              )
+          }
+        );
+
+      if(!response.ok){
+
+        throw new Error(
+          "Database update failed: "+
+          await response.text()
+        );
+
+      }
+
+      showMessage(
+        "formMessage",
+        "✅ PYQ updated successfully!",
+        "success"
+      );
+
+      cancelEdit();
+
+      await loadPYQs();
+
+      return;
+    }
+
+
+    /* ==========================================
+       NEW
+    ========================================== */
+
+    if(!file){
+
+      showMessage(
+        "formMessage",
+        "❌ Please select a PDF file.",
+        "error"
+      );
+
+      return;
+    }
+
+
+    const filePath =
+      createFilePath(
+        semester,
+        subjectCode,
+        year,
+        file.name
+      );
+
+
+    const upload =
+      await uploadPDF(
+        file,
+        filePath
+      );
+
+
+    if(!upload.ok){
+
+      throw new Error(
+        "PDF upload failed: "+
+        await upload.text()
+      );
+
+    }
+
+
+    const insertData = {
+
+      branch:
+        branchName,
+
+      semester:
+        semester,
+
+      subject:
+        subject,
+
+      subject_code:
+        subjectCode || null,
+
+      year:
+        year,
+
+      exam_type:
+        examType,
+
+      title:
+        title,
+
+      file_path:
+        filePath
+
+    };
+
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+          },
+
+          body:
+            JSON.stringify(
+              insertData
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      throw new Error(
+        "Database insert failed: "+
+        await response.text()
+      );
+
+    }
+
+
+    showMessage(
+      "formMessage",
+      "✅ PYQ uploaded successfully!",
+      "success"
+    );
+
+    cancelEdit();
+
+    await loadPYQs();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "formMessage",
+      "❌ "+
+      error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled=false;
+
+  }
+
+}
+
+
+/* =====================================================
+   UPLOAD PDF
+===================================================== */
+
+async function uploadPDF(
+  file,
+  path
+){
+
+  return fetch(
+    SUPABASE_URL+
+    "/storage/v1/object/"+
+    encodeURIComponent(BUCKET)+
+    "/"+
+    path
+      .split("/")
+      .map(
+        encodeURIComponent
+      )
+      .join("/"),
+    {
+      method:"POST",
+
+      headers:{
+        "apikey":
+          SUPABASE_KEY,
+
+        "Authorization":
+          "Bearer "+
+          getAccessToken(),
+
+        "Content-Type":
+          "application/pdf",
+
+        "x-upsert":
+          "true"
+      },
+
+      body:file
+    }
+  );
+
+}
+
+
+/* =====================================================
+   DELETE STORAGE FILE
+===================================================== */
+
+async function deleteStorageFile(
+  path
+){
+
+  if(!path){
+    return;
+  }
+
+  try{
+
+    await fetch(
+      SUPABASE_URL+
+      "/storage/v1/object/"+
+      encodeURIComponent(BUCKET),
+      {
+        method:"DELETE",
+
+        headers:{
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer "+
+            getAccessToken(),
+
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify({
+            prefixes:[path]
+          })
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Storage delete failed:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   DELETE PYQ
+===================================================== */
+
+async function deletePYQ(id){
+
+  const paper =
+    pyqs.find(
+      p =>
+        Number(p.id)===Number(id)
+    );
+
+  if(!paper){
+    return;
+  }
+
+  if(
+    !confirm(
+      "Delete this PYQ?\n\n"+
+      (
+        paper.title ||
+        "Untitled PYQ"
+      )
+    )
+  ){
+    return;
+  }
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs?id=eq."+
+        encodeURIComponent(id),
+        {
+          method:"DELETE",
+
+          headers:{
+            "Prefer":
+              "return=representation"
+          }
+        }
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Database delete failed: "+
+        await response.text()
+      );
+
+    }
+
+    if(paper.file_path){
+
+      await deleteStorageFile(
+        paper.file_path
+      );
+
+    }
+
+    alert(
+      "✅ PYQ deleted successfully!"
+    );
+
+    await loadPYQs();
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Could not delete PYQ.\n\n"+
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   FILE PATH
+===================================================== */
+
+function createFilePath(
+  semester,
+  subjectCode,
+  year,
+  originalName
+){
+
+  const safeCode =
+    (
+      subjectCode ||
+      "PYQ"
+    )
+    .replace(
+      /[^a-zA-Z0-9_-]/g,
+      "_"
+    );
+
+  const safeName =
+    originalName
+      .replace(
+        /\.pdf$/i,
+        ""
+      )
+      .replace(
+        /[^a-zA-Z0-9_-]/g,
+        "_"
+      );
+
+  return (
+    "semester-"+
+    semester+
+    "/"+
+    safeCode+
+    "_"+
+    year+
+    "_"+
+    safeName+
+    "_"+
+    Date.now()+
+    ".pdf"
+  );
+
+}
+
+
+/* =====================================================
+   PDF URL
+===================================================== */
+
+function getPDFUrl(path){
+
+  if(!path){
+    return "#";
+  }
+
+  return (
+    SUPABASE_URL+
+    "/storage/v1/object/public/"+
+    encodeURIComponent(BUCKET)+
+    "/"+
+    path
+      .split("/")
+      .map(
+        encodeURIComponent
+      )
+      .join("/")
+  );
+
+}
+
+
+/* =====================================================
+   ACCESS TOKEN
+===================================================== */
+
+function getAccessToken(){
+
+  return (
+    localStorage.getItem(
+      "outr_access_token"
+    ) ||
+    SUPABASE_KEY
+  );
+
+}
+
+
+/* =====================================================
+   FIND BRANCH ID
+===================================================== */
+
+function findBranchId(name){
+
+  const branch =
+    branches.find(
+      b =>
+        (
+          b.name ||
+          b.branch ||
+          b.branch_name ||
+          ""
+        )
+        .toLowerCase() ===
+        String(name || "")
+          .toLowerCase()
+    );
+
+  return branch
+    ? String(branch.id)
+    : "";
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function updateDashboard(){
+
+  document
+    .getElementById("totalPYQs")
+    .textContent =
+      pyqs.length;
+
+  document
+    .getElementById("totalBranches")
+    .textContent =
+      branches.length;
+
+  const years =
+    new Set(
+      pyqs.map(
+        p =>
+          Number(p.year)
+      )
+    );
+
+  const subjects =
+    new Set(
+      pyqs.map(
+        p =>
+          String(
+            p.subject || ""
+          )
+          .toLowerCase()
+      )
+    );
+
+  document
+    .getElementById("totalYears")
+    .textContent =
+      years.size;
+
+  document
+    .getElementById("totalSubjects")
+    .textContent =
+      subjects.size;
+
+
+  const recent =
+    pyqs.slice(0,5);
+
+  displayPYQsIn(
+    recent,
+    document.getElementById(
+      "dashboardRecent"
+    )
+  );
+
+}
+
+
+function displayPYQsIn(
+  data,
+  element
+){
+
+  if(!data.length){
+
+    element.innerHTML =
+      `<div class="empty">
+        No PYQs available.
+      </div>`;
+
+    return;
+  }
+
+  element.innerHTML =
+    data
+      .map(
+        p => `
+
+          <div class="paper">
+
+            <div class="paper-title">
+              📄
+              ${escapeHTML(
+                p.title || ""
+              )}
+            </div>
+
+            <div class="paper-info">
+
+              🏫
+              ${escapeHTML(
+                p.branch || ""
+              )}
+
+              <br>
+
+              📖
+              ${escapeHTML(
+                p.subject || ""
+              )}
+
+              <br>
+
+              📝
+              ${escapeHTML(
+                p.exam_type || ""
+              )}
+              •
+              ${p.year}
+
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+}
+
+
+/* =====================================================
+   MAINTENANCE
+===================================================== */
+
+/*
+  This section supports a common key/value
+  site_settings table.
+
+  Expected structure:
+  key   | value
+
+  Example:
+  maintenance_mode | false
+  maintenance_message | Website under maintenance...
+*/
+
+async function loadMaintenance(){
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/site_settings?select=*"
+      );
+
+    if(!response.ok){
+
+      console.warn(
+        "site_settings could not be loaded:",
+        await response.text()
+      );
+
+      document
+        .getElementById(
+          "statusDescription"
+        )
+        .textContent =
+          "Settings table could not be read.";
+
+      return;
+    }
+
+    const settings =
+      await response.json();
+
+    const mode =
+      findSetting(
+        settings,
+        "maintenance_mode"
+      );
+
+    const message =
+      findSetting(
+        settings,
+        "maintenance_message"
+      );
+
+    document
+      .getElementById(
+        "maintenanceToggle"
+      )
+      .checked =
+        String(mode)
+          .toLowerCase()==="true";
+
+    document
+      .getElementById(
+        "maintenanceMessage"
+      )
+      .value =
+        message ||
+        "Website is under maintenance. Please check again later.";
+
+    updateStatusText();
+
+  }catch(error){
+
+    console.error(error);
+
+  }
+
+}
+
+
+function findSetting(
+  settings,
+  key
+){
+
+  const item =
+    settings.find(
+      s =>
+        (
+          s.key ||
+          s.setting_key ||
+          s.name ||
+          ""
+        ) === key
+    );
+
+  if(!item){
+    return null;
+  }
+
+  return (
+    item.value ??
+    item.setting_value ??
+    item.data ??
+    null
+  );
+
+}
+
+
+async function toggleMaintenance(){
+
+  const enabled =
+    document
+      .getElementById(
+        "maintenanceToggle"
+      )
+      .checked;
+
+  try{
+
+    await upsertSetting(
+      "maintenance_mode",
+      String(enabled)
+    );
+
+    updateStatusText();
+
+  }catch(error){
+
+    document
+      .getElementById(
+        "maintenanceToggle"
+      )
+      .checked =
+        !enabled;
+
+    showMessage(
+      "settingsMessage",
+      "❌ Could not change website status: "+
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+function updateStatusText(){
+
+  const enabled =
+    document
+      .getElementById(
+        "maintenanceToggle"
+      )
+      .checked;
+
+  document
+    .getElementById(
+      "statusDescription"
+    )
+    .textContent =
+      enabled
+        ? "🔴 Maintenance Mode ON — public site should be disabled."
+        : "🟢 Website is LIVE.";
+
+}
+
+
+async function saveMaintenanceMessage(){
+
+  const message =
+    document
+      .getElementById(
+        "maintenanceMessage"
+      )
+      .value
+      .trim();
+
+  if(!message){
+
+    showMessage(
+      "settingsMessage",
+      "❌ Enter a maintenance message.",
+      "error"
+    );
+
+    return;
+  }
+
+  try{
+
+    await upsertSetting(
+      "maintenance_message",
+      message
+    );
+
+    showMessage(
+      "settingsMessage",
+      "✅ Maintenance message saved.",
+      "success"
+    );
+
+  }catch(error){
+
+    showMessage(
+      "settingsMessage",
+      "❌ "+
+      error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+async function upsertSetting(
+  key,
+  value
+){
+
+  /*
+    First try PATCH.
+    If no row exists, POST.
+  */
+
+  const patch =
+    await supabaseRequest(
+      "/rest/v1/site_settings?key=eq."+
+      encodeURIComponent(key),
+      {
+        method:"PATCH",
+
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "Prefer":
+            "return=representation"
+        },
+
+        body:
+          JSON.stringify({
+            value:value
+          })
+      }
+    );
+
+  if(!patch.ok){
+
+    throw new Error(
+      await patch.text()
+    );
+
+  }
+
+  const rows =
+    await patch.json();
+
+  if(rows.length){
+    return;
+  }
+
+  const insert =
+    await supabaseRequest(
+      "/rest/v1/site_settings",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "Prefer":
+            "return=representation"
+        },
+
+        body:
+          JSON.stringify({
+            key:key,
+            value:value
+          })
+      }
+    );
+
+  if(!insert.ok){
+
+    throw new Error(
+      await insert.text()
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+function showTab(
+  id,
+  button
+){
+
+  [
+    "dashboardTab",
+    "pyqTab",
+    "branchTab",
+    "settingsTab"
+  ]
+  .forEach(
+    tab => {
+
+      document
+        .getElementById(tab)
+        .classList.add(
+          "hidden"
+        );
+
+    }
+  );
+
+  document
+    .getElementById(id)
+    .classList.remove(
+      "hidden"
+    );
+
+  document
+    .querySelectorAll(
+      ".nav-btn"
+    )
+    .forEach(
+      b =>
+        b.classList.remove(
+          "active"
+        )
+    );
+
+  if(button){
+    button.classList.add(
+      "active"
+    );
+  }
+
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+function showMessage(
+  id,
+  text,
+  type
+){
+
+  const element =
+    document.getElementById(id);
+
+  element.className =
+    "message "+
+    type;
+
+  element.textContent =
+    text;
+
+  element.style.display =
+    "block";
+
+}
+
+
+/* =====================================================
+   HELPERS
+===================================================== */
+
+function ordinal(n){
+
+  n=Number(n);
+
+  if(n===1)return"1st";
+  if(n===2)return"2nd";
+  if(n===3)return"3rd";
+
+  return n+"th";
+
+}
+
+
+function escapeHTML(text){
+
+  return String(
+    text ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    const token =
+      localStorage.getItem(
+        "outr_access_token"
+      );
+
+    if(token){
+
+      showAdmin();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+  </html>
