@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OUTR PYQ Hub - Admin</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7fb;
+  color:#172033;
+  min-height:100vh;
+}
+
+.container{
+  max-width:650px;
+  margin:auto;
+  padding:25px 18px;
+}
+
+.header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.header h1{
+  font-size:27px;
+  margin-bottom:7px;
+}
+
+.header p{
+  color:#667085;
+  font-size:14px;
+}
+
+.box{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin:14px 0 7px;
+}
+
+input,
+select{
+  width:100%;
+  padding:13px;
+  border:1px solid #d7dce5;
+  border-radius:10px;
+  font-size:15px;
+  background:white;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:#4f46e5;
+}
+
+button{
+  width:100%;
+  border:none;
+  padding:14px;
+  border-radius:10px;
+  background:#172033;
+  color:white;
+  font-size:15px;
+  font-weight:700;
+  cursor:pointer;
+  margin-top:18px;
+}
+
+button:disabled{
+  opacity:.6;
+}
+
+.message{
+  margin-top:15px;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
+  display:none;
+}
+
+.success{
+  display:block;
+  background:#ecfdf3;
+  color:#067647;
+}
+
+.error{
+  display:block;
+  background:#fef3f2;
+  color:#b42318;
+}
+
+.hidden{
+  display:none;
+}
+
+.logout{
+  background:#eef2ff;
+  color:#3730a3;
+}
+
+.small{
+  color:#667085;
+  font-size:12px;
+  margin-top:7px;
+}
+
+footer{
+  text-align:center;
+  color:#667085;
+  font-size:13px;
+  padding:25px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="header">
+    <h1>🔐 OUTR PYQ HUB</h1>
+    <p>Administrator Panel</p>
+  </div>
+
+
+  <!-- LOGIN -->
+
+  <div id="loginBox" class="box">
+
+    <h2>Admin Login</h2>
+
+    <label>Email</label>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Admin email"
+    >
+
+    <label>Password</label>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Password"
+    >
+
+    <button onclick="login()">
+      Login
+    </button>
+
+    <div id="loginMessage" class="message"></div>
+
+  </div>
+
+
+  <!-- ADMIN PANEL -->
+
+  <div id="adminBox" class="box hidden">
+
+    <h2>➕ Add New PYQ</h2>
+
+    <label>Branch</label>
+
+    <select id="branch">
+      <option value="Civil">Civil</option>
+    </select>
+
+
+    <label>Semester</label>
+
+    <select id="semester">
+
+      <option value="1">1st Semester</option>
+      <option value="2">2nd Semester</option>
+      <option value="3">3rd Semester</option>
+      <option value="4">4th Semester</option>
+      <option value="5">5th Semester</option>
+      <option value="6">6th Semester</option>
+      <option value="7">7th Semester</option>
+      <option value="8">8th Semester</option>
+
+    </select>
+
+
+    <label>Subject</label>
+
+    <input
+      id="subject"
+      type="text"
+      placeholder="e.g. Fluid Mechanics"
+    >
+
+
+    <label>Subject Code</label>
+
+    <input
+      id="subjectCode"
+      type="text"
+      placeholder="e.g. FM"
+    >
+
+
+    <label>Year</label>
+
+    <input
+      id="year"
+      type="number"
+      placeholder="2025"
+    >
+
+
+    <label>Exam Type</label>
+
+    <select id="examType">
+
+      <option value="Mid Term">
+        Mid Term
+      </option>
+
+      <option value="End Semester">
+        End Semester
+      </option>
+
+    </select>
+
+
+    <label>PDF File</label>
+
+    <input
+      id="pdf"
+      type="file"
+      accept=".pdf,application/pdf"
+    >
+
+    <div class="small">
+      Only PDF files are allowed.
+    </div>
+
+
+    <button
+      id="uploadButton"
+      onclick="uploadPYQ()"
+    >
+      📤 Upload PYQ
+    </button>
+
+    <div id="uploadMessage" class="message"></div>
+
+
+    <button
+      class="logout"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+
+<footer>
+  Made by Ritesh Mallik<br>
+  Civil • OUTR
+</footer>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://qxomkkmdpixjlbvyacjs.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_1OEksUcpmU78oj6vkW9keQ_oZUqXh7H";
+
+const BUCKET =
+"PYQS Pdfs";
+
+
+/* -------------------------
+   LOGIN
+------------------------- */
+
+async function login(){
+
+  const email =
+    document.getElementById("email").value.trim();
+
+  const password =
+    document.getElementById("password").value;
+
+  const message =
+    document.getElementById("loginMessage");
+
+  message.className="message";
+  message.style.display="none";
+
+  if(!email || !password){
+
+    showMessage(
+      message,
+      "Please enter email and password.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":"application/json",
+            "apikey":SUPABASE_KEY
+          },
+
+          body:JSON.stringify({
+            email:email,
+            password:password
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.msg ||
+        data.error_description ||
+        "Login failed"
+      );
+
+    }
+
+
+    localStorage.setItem(
+      "supabase_access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "supabase_refresh_token",
+      data.refresh_token
+    );
+
+
+    document
+      .getElementById("loginBox")
+      .classList.add("hidden");
+
+    document
+      .getElementById("adminBox")
+      .classList.remove("hidden");
+
+
+  }catch(error){
+
+    showMessage(
+      message,
+      "❌ " + error.message,
+      "error"
+    );
+
+  }
+
+}
+
+
+/* -------------------------
+   UPLOAD
+------------------------- */
+
+async function uploadPYQ(){
+
+  const button =
+    document.getElementById("uploadButton");
+
+  const message =
+    document.getElementById("uploadMessage");
+
+  const file =
+    document.getElementById("pdf").files[0];
+
+  const branch =
+    document.getElementById("branch").value;
+
+  const semester =
+    document.getElementById("semester").value;
+
+  const subject =
+    document.getElementById("subject").value.trim();
+
+  const subjectCode =
+    document.getElementById("subjectCode").value.trim();
+
+  const year =
+    document.getElementById("year").value;
+
+  const examType =
+    document.getElementById("examType").value;
+
+
+  message.className="message";
+  message.style.display="none";
+
+
+  if(!subject || !year || !file){
+
+    showMessage(
+      message,
+      "Please fill all required fields and select a PDF.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if(file.type !== "application/pdf"){
+
+    showMessage(
+      message,
+      "Only PDF files are allowed.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  const token =
+    localStorage.getItem(
+      "supabase_access_token"
+    );
+
+
+  if(!token){
+
+    showMessage(
+      message,
+      "Please login again.",
+      "error"
+    );
+
+    return;
+  }
+
+
+  button.disabled=true;
+  button.textContent="Uploading...";
+
+
+  try{
+
+    /*
+      Create a safe filename
+    */
+
+    const cleanName =
+      file.name
+        .replace(/[^a-zA-Z0-9._-]/g,"_");
+
+    const filePath =
+      Date.now() + "_" + cleanName;
+
+
+    /*
+      1. Upload PDF
+    */
+
+    const uploadResponse =
+      await fetch(
+
+        SUPABASE_URL +
+        "/storage/v1/object/" +
+        encodeURIComponent(BUCKET) +
+        "/" +
+        filePath,
+
+        {
+          method:"POST",
+
+          headers:{
+            "Authorization":"Bearer " + token,
+            "apikey":SUPABASE_KEY,
+            "Content-Type":"application/pdf"
+          },
+
+          body:file
+        }
+
+      );
+
+
+    if(!uploadResponse.ok){
+
+      const error =
+        await uploadResponse.text();
+
+      throw new Error(
+        "PDF upload failed: " + error
+      );
+
+    }
+
+
+    /*
+      2. Add database record
+    */
+
+    const title =
+      subject +
+      " - " +
+      examType +
+      " " +
+      year;
+
+
+    const databaseResponse =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/pyqs",
+
+        {
+          method:"POST",
+
+          headers:{
+            "Authorization":"Bearer " + token,
+            "apikey":SUPABASE_KEY,
+            "Content-Type":"application/json",
+            "Prefer":"return=minimal"
+          },
+
+          body:JSON.stringify({
+
+            branch:branch,
+
+            semester:Number(semester),
+
+            subject:subject,
+
+            subject_code:
+              subjectCode || null,
+
+            exam_type:examType,
+
+            year:Number(year),
+
+            title:title,
+
+            file_path:filePath
+
+          })
+
+        }
+
+      );
+
+
+    if(!databaseResponse.ok){
+
+      const error =
+        await databaseResponse.text();
+
+      throw new Error(
+        "Database update failed: " + error
+      );
+
+    }
+
+
+    showMessage(
+      message,
+      "✅ PYQ uploaded successfully!",
+      "success"
+    );
+
+
+    document
+      .getElementById("subject")
+      .value="";
+
+    document
+      .getElementById("subjectCode")
+      .value="";
+
+    document
+      .getElementById("year")
+      .value="";
+
+    document
+      .getElementById("pdf")
+      .value="";
+
+
+  }catch(error){
+
+    showMessage(
+      message,
+      "❌ " + error.message,
+      "error"
+    );
+
+  }
+
+
+  button.disabled=false;
+  button.textContent="📤 Upload PYQ";
+
+}
+
+
+/* -------------------------
+   LOGOUT
+------------------------- */
+
+function logout(){
+
+  localStorage.removeItem(
+    "supabase_access_token"
+  );
+
+  localStorage.removeItem(
+    "supabase_refresh_token"
+  );
+
+  location.reload();
+
+}
+
+
+/* -------------------------
+   MESSAGE
+------------------------- */
+
+function showMessage(
+  element,
+  text,
+  type
+){
+
+  element.textContent=text;
+
+  element.className =
+    "message " + type;
+
+  element.style.display="block";
+
+}
+
+
+/* -------------------------
+   EXISTING LOGIN
+------------------------- */
+
+if(
+  localStorage.getItem(
+    "supabase_access_token"
+  )
+){
+
+  document
+    .getElementById("loginBox")
+    .classList.add("hidden");
+
+  document
+    .getElementById("adminBox")
+    .classList.remove("hidden");
+
+}
+
+</script>
+
+</body>
+  </html>
