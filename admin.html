@@ -3,15 +3,39 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>OUTR PYQ Hub - Admin</title>
+
+<title>OUTR PYQ Hub • Admin</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   font-family:Arial,Helvetica,sans-serif;
   background:#f5f7fb;
   color:#172033;
+  min-height:100vh;
+}
+
+header{
+  background:white;
+  padding:28px 20px 22px;
+  text-align:center;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.logo{
+  font-size:28px;
+  font-weight:800;
+}
+
+.subtitle{
+  margin-top:6px;
+  color:#667085;
+  font-size:14px;
 }
 
 .container{
@@ -20,30 +44,18 @@ body{
   padding:20px 16px 40px;
 }
 
-.header{
-  text-align:center;
-  padding:15px 0 25px;
-}
-
-.header h1{font-size:27px}
-.header p{
-  color:#667085;
-  font-size:14px;
-  margin-top:6px;
-}
-
-.box{
+.card{
   background:white;
   border:1px solid #e5e7eb;
-  border-radius:16px;
+  border-radius:18px;
   padding:20px;
   margin-bottom:18px;
-  box-shadow:0 4px 15px rgba(0,0,0,.05);
+  box-shadow:0 4px 16px rgba(0,0,0,.05);
 }
 
 h2{
-  font-size:19px;
-  margin-bottom:15px;
+  font-size:20px;
+  margin-bottom:18px;
 }
 
 label{
@@ -53,102 +65,55 @@ label{
   margin:14px 0 7px;
 }
 
-input,select{
+input,
+select{
   width:100%;
-  padding:13px;
+  padding:14px;
   border:1px solid #d7dce5;
-  border-radius:10px;
-  font-size:15px;
+  border-radius:11px;
   background:white;
+  font-size:15px;
   outline:none;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
   border-color:#4f46e5;
 }
 
 button{
   border:0;
-  padding:12px 16px;
-  border-radius:9px;
+  cursor:pointer;
+  border-radius:11px;
+  padding:14px 16px;
+  font-size:15px;
+  font-weight:700;
+}
+
+.primary{
+  width:100%;
   background:#172033;
   color:white;
-  font-size:14px;
-  font-weight:700;
-  cursor:pointer;
-}
-
-button:disabled{
-  opacity:.6;
-}
-
-.full{
-  width:100%;
   margin-top:18px;
 }
 
-.logout{
+.secondary{
+  width:100%;
   background:#eef2ff;
   color:#3730a3;
+  margin-top:10px;
 }
 
-.message{
-  display:none;
-  margin-top:14px;
-  padding:12px;
-  border-radius:9px;
-  font-size:14px;
+.logout{
+  width:100%;
+  background:#eef2ff;
+  color:#3730a3;
+  margin-top:10px;
 }
 
-.success{
-  display:block;
-  background:#ecfdf3;
-  color:#067647;
-}
-
-.error{
-  display:block;
-  background:#fef3f2;
-  color:#b42318;
-}
-
-.hidden{display:none}
-
-.search{
-  margin-bottom:15px;
-}
-
-.pyq{
-  border:1px solid #e5e7eb;
-  border-radius:13px;
-  padding:16px;
-  margin-top:12px;
-}
-
-.pyq h3{
-  font-size:16px;
-  margin-bottom:7px;
-}
-
-.info{
-  color:#667085;
-  font-size:13px;
-  line-height:1.7;
-}
-
-.actions{
-  display:flex;
-  gap:8px;
-  margin-top:13px;
-  flex-wrap:wrap;
-}
-
-.actions button{
-  padding:9px 12px;
-}
-
-.view{
-  background:#172033;
+.danger{
+  background:#fee2e2;
+  color:#b91c1c;
 }
 
 .edit{
@@ -156,37 +121,100 @@ button:disabled{
   color:#3730a3;
 }
 
-.delete{
-  background:#fee4e2;
-  color:#b42318;
+.view{
+  background:#172033;
+  color:white;
 }
 
-.count{
+.message{
+  padding:14px;
+  border-radius:11px;
+  margin-top:15px;
+  font-size:14px;
+  line-height:1.5;
+  display:none;
+}
+
+.success{
+  display:block;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.error{
+  display:block;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.hidden{
+  display:none !important;
+}
+
+.paper{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:15px;
+  padding:17px;
+  margin-bottom:12px;
+}
+
+.paper-title{
+  font-size:17px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.paper-info{
   color:#667085;
   font-size:13px;
-  margin-bottom:8px;
+  line-height:1.8;
+}
+
+.actions{
+  display:flex;
+  gap:9px;
+  margin-top:13px;
+}
+
+.actions button,
+.actions a{
+  flex:1;
+  text-align:center;
+  text-decoration:none;
+}
+
+.search{
+  margin-bottom:15px;
+}
+
+.loading{
+  text-align:center;
+  color:#667085;
+  padding:20px;
 }
 
 footer{
   text-align:center;
   color:#667085;
   font-size:13px;
-  padding:25px;
+  padding:35px 20px;
+  border-top:1px solid #e5e7eb;
+  background:white;
 }
 
-.small{
-  color:#667085;
-  font-size:12px;
-  margin-top:6px;
+footer strong{
+  color:#172033;
 }
 
 @media(max-width:600px){
-  .actions{
-    flex-direction:column;
+
+  .logo{
+    font-size:24px;
   }
 
-  .actions button{
-    width:100%;
+  .actions{
+    flex-direction:column;
   }
 }
 </style>
@@ -194,129 +222,274 @@ footer{
 
 <body>
 
+<header>
+
+  <div class="logo">
+    🔐 OUTR PYQ HUB
+  </div>
+
+  <div class="subtitle">
+    Admin Panel • Manage Question Papers
+  </div>
+
+</header>
+
+
 <div class="container">
 
-<div class="header">
-  <h1>🔐 OUTR PYQ HUB</h1>
-  <p>Administrator Dashboard</p>
+
+<!-- =========================
+     LOGIN
+========================= -->
+
+<section id="loginSection" class="card">
+
+  <h2>🔐 Admin Login</h2>
+
+  <label>Email</label>
+
+  <input
+    id="loginEmail"
+    type="email"
+    placeholder="Enter admin email"
+  >
+
+  <label>Password</label>
+
+  <input
+    id="loginPassword"
+    type="password"
+    placeholder="Enter password"
+  >
+
+  <button
+    class="primary"
+    onclick="login()">
+
+    🔑 Login
+
+  </button>
+
+  <div
+    id="loginMessage"
+    class="message">
+  </div>
+
+</section>
+
+
+<!-- =========================
+     ADMIN PANEL
+========================= -->
+
+<section
+  id="adminSection"
+  class="hidden">
+
+
+<!-- =========================
+     UPLOAD / EDIT
+========================= -->
+
+<div class="card">
+
+  <h2 id="formTitle">
+    ➕ Upload New PYQ
+  </h2>
+
+
+  <label>Branch</label>
+
+  <input
+    id="branch"
+    type="text"
+    value="Civil"
+    placeholder="Civil"
+  >
+
+
+  <label>Semester</label>
+
+  <select id="semester">
+
+    <option value="1">1st Semester</option>
+    <option value="2">2nd Semester</option>
+    <option value="3">3rd Semester</option>
+    <option value="4">4th Semester</option>
+    <option value="5">5th Semester</option>
+    <option value="6">6th Semester</option>
+    <option value="7">7th Semester</option>
+    <option value="8">8th Semester</option>
+
+  </select>
+
+
+  <label>Subject</label>
+
+  <input
+    id="subject"
+    type="text"
+    placeholder="Data Analysis and Interpretation"
+  >
+
+
+  <label>Subject Code</label>
+
+  <input
+    id="subjectCode"
+    type="text"
+    placeholder="DAI"
+  >
+
+
+  <label>Year</label>
+
+  <input
+    id="year"
+    type="number"
+    placeholder="2025"
+  >
+
+
+  <label>Exam Type</label>
+
+  <select id="examType">
+
+    <option value="Mid Term">
+      Mid Term
+    </option>
+
+    <option value="End Term">
+      End Term
+    </option>
+
+    <option value="Back Paper">
+      Back Paper
+    </option>
+
+    <option value="Other">
+      Other
+    </option>
+
+  </select>
+
+
+  <label>Title</label>
+
+  <input
+    id="title"
+    type="text"
+    placeholder="MID TERM DAI 2025"
+  >
+
+
+  <label id="fileLabel">
+    PDF File
+  </label>
+
+  <input
+    id="pdfFile"
+    type="file"
+    accept="application/pdf"
+  >
+
+
+  <div
+    id="currentFile"
+    class="message">
+  </div>
+
+
+  <button
+    id="submitButton"
+    class="primary"
+    onclick="savePYQ()">
+
+    ⬆️ Upload PYQ
+
+  </button>
+
+
+  <button
+    id="cancelButton"
+    class="secondary hidden"
+    onclick="cancelEdit()">
+
+    Cancel Edit
+
+  </button>
+
+
+  <div
+    id="formMessage"
+    class="message">
+  </div>
+
 </div>
 
 
-<!-- LOGIN -->
+<!-- =========================
+     PYQ LIST
+========================= -->
 
-<div id="loginBox" class="box">
+<div class="card">
 
-<h2>Admin Login</h2>
+  <h2>
+    📚 Manage PYQs
+  </h2>
 
-<label>Email</label>
-<input id="email" type="email" placeholder="Admin email">
+  <input
+    id="adminSearch"
+    class="search"
+    type="text"
+    placeholder="🔎 Search PYQs..."
+    oninput="filterAdminPYQs()"
+  >
 
-<label>Password</label>
-<input id="password" type="password" placeholder="Password">
+  <div id="adminList">
 
-<button class="full" onclick="login()">Login</button>
+    <div class="loading">
+      Loading PYQs...
+    </div>
 
-<div id="loginMessage" class="message"></div>
+  </div>
 
 </div>
 
-
-<!-- DASHBOARD -->
-
-<div id="dashboard" class="hidden">
-
-
-<!-- ADD PYQ -->
-
-<div class="box">
-
-<h2>➕ Add New PYQ</h2>
-
-<label>Branch</label>
-<select id="branch">
-<option value="Civil">Civil</option>
-</select>
-
-<label>Semester</label>
-<select id="semester">
-<option value="1">1st Semester</option>
-<option value="2">2nd Semester</option>
-<option value="3">3rd Semester</option>
-<option value="4">4th Semester</option>
-<option value="5">5th Semester</option>
-<option value="6">6th Semester</option>
-<option value="7">7th Semester</option>
-<option value="8">8th Semester</option>
-</select>
-
-<label>Subject</label>
-<input id="subject" placeholder="e.g. Fluid Mechanics">
-
-<label>Subject Code</label>
-<input id="subjectCode" placeholder="e.g. FM">
-
-<label>Year</label>
-<input id="year" type="number" placeholder="2025">
-
-<label>Exam Type</label>
-<select id="examType">
-<option value="Mid Term">Mid Term</option>
-<option value="End Semester">End Semester</option>
-</select>
-
-<label>PDF File</label>
-<input id="pdf" type="file" accept=".pdf,application/pdf">
-
-<div class="small">Only PDF files are allowed.</div>
 
 <button
-  id="uploadButton"
-  class="full"
-  onclick="uploadPYQ()">
-  📤 Upload PYQ
+  class="logout"
+  onclick="logout()">
+
+  Logout
+
 </button>
 
-<div id="uploadMessage" class="message"></div>
+
+</section>
+
 
 </div>
 
-
-<!-- MANAGE -->
-
-<div class="box">
-
-<h2>📚 Manage PYQs</h2>
-
-<input
-  id="search"
-  class="search"
-  placeholder="🔎 Search subject, year, exam..."
-  oninput="renderPYQs()">
-
-<div id="count" class="count"></div>
-
-<div id="pyqList">
-Loading...
-</div>
-
-</div>
-
-
-<button class="full logout" onclick="logout()">
-Logout
-</button>
-
-</div>
-
-</div>
 
 <footer>
-Made by Ritesh Mallik<br>
-Civil • OUTR
+
+  <strong>
+    Made by Ritesh Mallik
+  </strong>
+
+  <br>
+
+  Civil • OUTR
+
 </footer>
 
 
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://qxomkkmdpixjlbvyacjs.supabase.co";
@@ -327,7 +500,47 @@ const SUPABASE_KEY =
 const BUCKET =
 "PYQS Pdfs";
 
-let pyqs=[];
+
+/* =========================
+   VARIABLES
+========================= */
+
+let pyqs = [];
+
+let editingId = null;
+
+
+/* =========================
+   SUPABASE REQUEST
+========================= */
+
+async function supabaseRequest(
+  endpoint,
+  options={}
+){
+
+  const headers = {
+
+    "apikey":
+      SUPABASE_KEY,
+
+    "Authorization":
+      "Bearer "+
+      SUPABASE_KEY,
+
+    ...(options.headers || {})
+
+  };
+
+  return fetch(
+    SUPABASE_URL + endpoint,
+    {
+      ...options,
+      headers
+    }
+  );
+
+}
 
 
 /* =========================
@@ -336,661 +549,114 @@ let pyqs=[];
 
 async function login(){
 
-const email =
-document.getElementById("email").value.trim();
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
-const password =
-document.getElementById("password").value;
-
-const message =
-document.getElementById("loginMessage");
-
-if(!email || !password){
-
-showMessage(
-message,
-"Please enter email and password.",
-"error"
-);
-
-return;
-}
-
-try{
-
-const response =
-await fetch(
-SUPABASE_URL+
-"/auth/v1/token?grant_type=password",
-{
-method:"POST",
-headers:{
-"Content-Type":"application/json",
-"apikey":SUPABASE_KEY
-},
-body:JSON.stringify({
-email:email,
-password:password
-})
-}
-);
-
-const data =
-await response.json();
-
-if(!response.ok){
-
-throw new Error(
-data.msg ||
-data.error_description ||
-"Login failed"
-);
-
-}
-
-localStorage.setItem(
-"supabase_access_token",
-data.access_token
-);
-
-localStorage.setItem(
-"supabase_refresh_token",
-data.refresh_token
-);
-
-showDashboard();
-
-}catch(error){
-
-showMessage(
-message,
-"❌ "+error.message,
-"error"
-);
-
-}
-
-}
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
 
 
-/* =========================
-   SHOW DASHBOARD
-========================= */
+  if(!email || !password){
 
-function showDashboard(){
+    showMessage(
+      "loginMessage",
+      "❌ Please enter email and password.",
+      "error"
+    );
 
-document
-.getElementById("loginBox")
-.classList.add("hidden");
+    return;
 
-document
-.getElementById("dashboard")
-.classList.remove("hidden");
+  }
 
-loadPYQs();
+
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL+
+        "/auth/v1/token?grant_type=password",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "apikey":
+              SUPABASE_KEY
+          },
+
+          body:JSON.stringify({
+            email:email,
+            password:password
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(!response.ok){
+
+      throw new Error(
+        data.message ||
+        data.error_description ||
+        "Login failed"
+      );
+
+    }
+
+
+    localStorage.setItem(
+      "outr_access_token",
+      data.access_token
+    );
+
+    localStorage.setItem(
+      "outr_refresh_token",
+      data.refresh_token
+    );
+
+
+    showAdmin();
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "loginMessage",
+      "❌ "+error.message,
+      "error"
+    );
+
+  }
 
 }
 
 
 /* =========================
-   LOAD PYQS
+   SHOW ADMIN
 ========================= */
 
-async function loadPYQs(){
+function showAdmin(){
 
-const token =
-localStorage.getItem(
-"supabase_access_token"
-);
+  document
+    .getElementById("loginSection")
+    .classList.add("hidden");
 
-if(!token) return;
+  document
+    .getElementById("adminSection")
+    .classList.remove("hidden");
 
-try{
-
-const response =
-await fetch(
-SUPABASE_URL+
-"/rest/v1/pyqs?select=*&order=year.desc,id.desc",
-{
-headers:{
-"apikey":SUPABASE_KEY,
-"Authorization":"Bearer "+token
-}
-}
-);
-
-if(!response.ok){
-
-throw new Error(
-"Could not load PYQs"
-);
-
-}
-
-pyqs=await response.json();
-
-renderPYQs();
-
-}catch(error){
-
-document.getElementById("pyqList").innerHTML =
-"❌ "+error.message;
-
-}
-
-}
-
-
-/* =========================
-   RENDER
-========================= */
-
-function renderPYQs(){
-
-const search =
-document
-.getElementById("search")
-.value
-.toLowerCase()
-.trim();
-
-const results =
-pyqs.filter(p=>{
-
-const text=(
-
-p.branch+" "+
-p.subject+" "+
-(p.subject_code||"")+" "+
-p.exam_type+" "+
-p.year+" "+
-p.semester+" "+
-p.title
-
-).toLowerCase();
-
-return text.includes(search);
-
-});
-
-document.getElementById("count").textContent =
-results.length+" PYQ(s)";
-
-const list =
-document.getElementById("pyqList");
-
-if(results.length===0){
-
-list.innerHTML=
-`<div class="count">
-📭 No PYQs found.
-</div>`;
-
-return;
-}
-
-list.innerHTML =
-results.map(p=>{
-
-const url =
-getPDFUrl(p.file_path);
-
-return `
-
-<div class="pyq">
-
-<h3>
-📄 ${escapeHTML(p.title)}
-</h3>
-
-<div class="info">
-
-🏗️ ${escapeHTML(p.branch)}
-<br>
-
-📚 ${ordinal(p.semester)} Semester
-<br>
-
-📖 ${escapeHTML(p.subject)}
-${p.subject_code ?
-" ("+escapeHTML(p.subject_code)+")"
-:""}
-<br>
-
-📝 ${escapeHTML(p.exam_type)}
- • ${p.year}
-
-</div>
-
-<div class="actions">
-
-<button
-class="view"
-onclick="window.open('${url}','_blank')">
-📖 View
-</button>
-
-<button
-class="edit"
-onclick="editPYQ(${p.id})">
-✏️ Edit
-</button>
-
-<button
-class="delete"
-onclick="deletePYQ(${p.id})">
-🗑️ Delete
-</button>
-
-</div>
-
-</div>
-
-`;
-
-}).join("");
-
-}
-
-
-/* =========================
-   UPLOAD
-========================= */
-
-async function uploadPYQ(){
-
-const button =
-document.getElementById("uploadButton");
-
-const message =
-document.getElementById("uploadMessage");
-
-const file =
-document.getElementById("pdf").files[0];
-
-const branch =
-document.getElementById("branch").value;
-
-const semester =
-document.getElementById("semester").value;
-
-const subject =
-document.getElementById("subject").value.trim();
-
-const subjectCode =
-document.getElementById("subjectCode").value.trim();
-
-const year =
-document.getElementById("year").value;
-
-const examType =
-document.getElementById("examType").value;
-
-const token =
-localStorage.getItem(
-"supabase_access_token"
-);
-
-if(!subject || !year || !file){
-
-showMessage(
-message,
-"Please fill all required fields.",
-"error"
-);
-
-return;
-}
-
-if(file.type!=="application/pdf"){
-
-showMessage(
-message,
-"Only PDF files are allowed.",
-"error"
-);
-
-return;
-}
-
-button.disabled=true;
-button.textContent="Uploading...";
-
-try{
-
-const cleanName =
-file.name.replace(
-/[^a-zA-Z0-9._-]/g,
-"_"
-);
-
-const filePath =
-Date.now()+"_"+cleanName;
-
-
-/* Upload PDF */
-
-const uploadResponse =
-await fetch(
-
-SUPABASE_URL+
-"/storage/v1/object/"+
-encodeURIComponent(BUCKET)+
-"/"+filePath,
-
-{
-method:"POST",
-
-headers:{
-"Authorization":"Bearer "+token,
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/pdf"
-},
-
-body:file
-
-}
-);
-
-if(!uploadResponse.ok){
-
-throw new Error(
-"PDF upload failed"
-);
-
-}
-
-
-/* Add database record */
-
-const title =
-subject+
-" - "+
-examType+
-" "+
-year;
-
-const dbResponse =
-await fetch(
-SUPABASE_URL+
-"/rest/v1/pyqs",
-{
-method:"POST",
-
-headers:{
-"Authorization":"Bearer "+token,
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/json",
-"Prefer":"return=minimal"
-},
-
-body:JSON.stringify({
-
-branch:branch,
-
-semester:Number(semester),
-
-subject:subject,
-
-subject_code:
-subjectCode || null,
-
-exam_type:examType,
-
-year:Number(year),
-
-title:title,
-
-file_path:filePath
-
-})
-}
-);
-
-if(!dbResponse.ok){
-
-throw new Error(
-"Database update failed"
-);
-
-}
-
-showMessage(
-message,
-"✅ PYQ uploaded successfully!",
-"success"
-);
-
-document.getElementById("subject").value="";
-document.getElementById("subjectCode").value="";
-document.getElementById("year").value="";
-document.getElementById("pdf").value="";
-
-await loadPYQs();
-
-}catch(error){
-
-showMessage(
-message,
-"❌ "+error.message,
-"error"
-);
-
-}
-
-button.disabled=false;
-button.textContent="📤 Upload PYQ";
-
-}
-
-
-/* =========================
-   EDIT
-========================= */
-
-async function editPYQ(id){
-
-const p =
-pyqs.find(x=>Number(x.id)===Number(id));
-
-if(!p) return;
-
-const newSubject =
-prompt(
-"Subject:",
-p.subject
-);
-
-if(newSubject===null) return;
-
-const newCode =
-prompt(
-"Subject Code:",
-p.subject_code || ""
-);
-
-if(newCode===null) return;
-
-const newYear =
-prompt(
-"Year:",
-p.year
-);
-
-if(newYear===null) return;
-
-const newExam =
-prompt(
-"Exam Type (Mid Term / End Semester):",
-p.exam_type
-);
-
-if(newExam===null) return;
-
-const token =
-localStorage.getItem(
-"supabase_access_token"
-);
-
-try{
-
-const response =
-await fetch(
-
-SUPABASE_URL+
-"/rest/v1/pyqs?id=eq."+id,
-
-{
-method:"PATCH",
-
-headers:{
-"Authorization":"Bearer "+token,
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/json",
-"Prefer":"return=minimal"
-},
-
-body:JSON.stringify({
-
-subject:newSubject.trim(),
-
-subject_code:
-newCode.trim() || null,
-
-year:Number(newYear),
-
-exam_type:newExam.trim(),
-
-title:
-newSubject.trim()+
-" - "+
-newExam.trim()+
-" "+
-newYear
-
-})
-}
-
-);
-
-if(!response.ok){
-
-throw new Error(
-"Could not update PYQ"
-);
-
-}
-
-alert("✅ PYQ updated successfully.");
-
-loadPYQs();
-
-}catch(error){
-
-alert("❌ "+error.message);
-
-}
-
-}
-
-
-/* =========================
-   DELETE
-========================= */
-
-async function deletePYQ(id){
-
-const p =
-pyqs.find(x=>Number(x.id)===Number(id));
-
-if(!p) return;
-
-const confirmed =
-confirm(
-"Delete this PYQ permanently?\n\n"+
-p.title+
-"\n\nThe database record and PDF will be deleted."
-);
-
-if(!confirmed) return;
-
-const token =
-localStorage.getItem(
-"supabase_access_token"
-);
-
-try{
-
-/* Delete database record */
-
-const dbResponse =
-await fetch(
-
-SUPABASE_URL+
-"/rest/v1/pyqs?id=eq."+id,
-
-{
-method:"DELETE",
-
-headers:{
-"Authorization":"Bearer "+token,
-"apikey":SUPABASE_KEY
-}
-
-}
-);
-
-if(!dbResponse.ok){
-
-throw new Error(
-"Could not delete database record"
-);
-
-}
-
-
-/* Delete PDF */
-
-const fileResponse =
-await fetch(
-
-SUPABASE_URL+
-"/storage/v1/object/"+
-encodeURIComponent(BUCKET),
-
-{
-method:"DELETE",
-
-headers:{
-"Authorization":"Bearer "+token,
-"apikey":SUPABASE_KEY,
-"Content-Type":"application/json"
-},
-
-body:JSON.stringify({
-prefixes:[p.file_path]
-})
-
-}
-);
-
-if(!fileResponse.ok){
-
-console.warn(
-"Database deleted, but PDF deletion failed."
-);
-
-}
-
-alert("✅ PYQ deleted.");
-
-loadPYQs();
-
-}catch(error){
-
-alert("❌ "+error.message);
-
-}
+  loadPYQs();
 
 }
 
@@ -1001,88 +667,1327 @@ alert("❌ "+error.message);
 
 function logout(){
 
-localStorage.removeItem(
-"supabase_access_token"
-);
+  localStorage.removeItem(
+    "outr_access_token"
+  );
 
-localStorage.removeItem(
-"supabase_refresh_token"
-);
+  localStorage.removeItem(
+    "outr_refresh_token"
+  );
 
-location.reload();
+  location.reload();
 
 }
 
 
 /* =========================
-   HELPERS
+   LOAD PYQS
 ========================= */
 
-function getPDFUrl(path){
+async function loadPYQs(){
 
-return SUPABASE_URL+
-"/storage/v1/object/public/"+
-encodeURIComponent(BUCKET)+
-"/"+
-path
-.split("/")
-.map(encodeURIComponent)
-.join("/");
+  const list =
+    document.getElementById(
+      "adminList"
+    );
+
+  list.innerHTML =
+    `<div class="loading">
+      Loading PYQs...
+    </div>`;
+
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs?select=*&order=year.desc,id.desc"
+      );
+
+
+    if(!response.ok){
+
+      const error =
+        await response.text();
+
+      throw new Error(error);
+
+    }
+
+
+    pyqs =
+      await response.json();
+
+
+    displayAdminPYQs(
+      pyqs
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    list.innerHTML =
+      `<div class="message error">
+        ❌ Could not load PYQs.
+        <br>
+        ${escapeHTML(error.message)}
+      </div>`;
+
+  }
 
 }
+
+
+/* =========================
+   DISPLAY PYQS
+========================= */
+
+function displayAdminPYQs(
+  data
+){
+
+  const list =
+    document.getElementById(
+      "adminList"
+    );
+
+
+  if(data.length===0){
+
+    list.innerHTML =
+      `<div class="loading">
+        📭 No PYQs found.
+      </div>`;
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    data.map(
+      paper => {
+
+        const url =
+          getPDFUrl(
+            paper.file_path
+          );
+
+
+        return `
+
+          <div class="paper">
+
+            <div class="paper-title">
+
+              📄
+              ${escapeHTML(
+                paper.title || "Untitled PYQ"
+              )}
+
+            </div>
+
+
+            <div class="paper-info">
+
+              🏗️
+              ${escapeHTML(
+                paper.branch || ""
+              )}
+
+              <br>
+
+              📚
+              ${ordinal(
+                paper.semester
+              )}
+              Semester
+
+              <br>
+
+              📖
+              ${escapeHTML(
+                paper.subject || ""
+              )}
+
+              ${
+                paper.subject_code
+                ?
+                " ("+
+                escapeHTML(
+                  paper.subject_code
+                )+
+                ")"
+                :
+                ""
+              }
+
+              <br>
+
+              📝
+              ${escapeHTML(
+                paper.exam_type || ""
+              )}
+              •
+              ${paper.year}
+
+            </div>
+
+
+            <div class="actions">
+
+              <a
+                class="btn view"
+                href="${url}"
+                target="_blank">
+
+                📖 View
+
+              </a>
+
+
+              <button
+                class="edit"
+                onclick="editPYQ(${paper.id})">
+
+                ✏️ Edit
+
+              </button>
+
+
+              <button
+                class="danger"
+                onclick="deletePYQ(${paper.id})">
+
+                🗑️ Delete
+
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filterAdminPYQs(){
+
+  const query =
+    document
+      .getElementById("adminSearch")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if(!query){
+
+    displayAdminPYQs(pyqs);
+
+    return;
+
+  }
+
+
+  const results =
+    pyqs.filter(
+      p => {
+
+        const text =
+          (
+            p.branch+
+            " "+
+            p.subject+
+            " "+
+            p.subject_code+
+            " "+
+            p.exam_type+
+            " "+
+            p.year+
+            " "+
+            p.semester+
+            " "+
+            p.title
+          ).toLowerCase();
+
+
+        return text.includes(query);
+
+      }
+    );
+
+
+  displayAdminPYQs(
+    results
+  );
+
+}
+
+
+/* =========================
+   EDIT PYQ
+========================= */
+
+function editPYQ(id){
+
+  const paper =
+    pyqs.find(
+      p =>
+        Number(p.id)===Number(id)
+    );
+
+
+  if(!paper){
+
+    alert(
+      "❌ PYQ not found."
+    );
+
+    return;
+
+  }
+
+
+  editingId =
+    Number(id);
+
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+      "✏️ Edit PYQ";
+
+
+  document
+    .getElementById("branch")
+    .value =
+      paper.branch || "";
+
+
+  document
+    .getElementById("semester")
+    .value =
+      paper.semester || "1";
+
+
+  document
+    .getElementById("subject")
+    .value =
+      paper.subject || "";
+
+
+  document
+    .getElementById("subjectCode")
+    .value =
+      paper.subject_code || "";
+
+
+  document
+    .getElementById("year")
+    .value =
+      paper.year || "";
+
+
+  document
+    .getElementById("examType")
+    .value =
+      paper.exam_type || "Mid Term";
+
+
+  document
+    .getElementById("title")
+    .value =
+      paper.title || "";
+
+
+  document
+    .getElementById("pdfFile")
+    .value =
+      "";
+
+
+  const current =
+    document.getElementById(
+      "currentFile"
+    );
+
+
+  current.className =
+    "message success";
+
+
+  current.style.display =
+    "block";
+
+
+  current.innerHTML =
+    `
+      📄 Current PDF:
+      <strong>
+        ${escapeHTML(
+          paper.file_path || "Unknown"
+        )}
+      </strong>
+      <br>
+      Leave PDF empty if you don't want to replace it.
+    `;
+
+
+  document
+    .getElementById("submitButton")
+    .textContent =
+      "💾 Update PYQ";
+
+
+  document
+    .getElementById("cancelButton")
+    .classList.remove(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("fileLabel")
+    .textContent =
+      "Replace PDF (optional)";
+
+
+  document
+    .getElementById("formMessage")
+    .style.display =
+      "none";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   CANCEL EDIT
+========================= */
+
+function cancelEdit(){
+
+  editingId=null;
+
+  document
+    .getElementById("formTitle")
+    .textContent =
+      "➕ Upload New PYQ";
+
+
+  document
+    .getElementById("submitButton")
+    .textContent =
+      "⬆️ Upload PYQ";
+
+
+  document
+    .getElementById("cancelButton")
+    .classList.add(
+      "hidden"
+    );
+
+
+  document
+    .getElementById("fileLabel")
+    .textContent =
+      "PDF File";
+
+
+  document
+    .getElementById("currentFile")
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById("formMessage")
+    .style.display =
+      "none";
+
+
+  document
+    .getElementById("pdfFile")
+    .value =
+      "";
+
+}
+
+
+/* =========================
+   SAVE / UPDATE PYQ
+========================= */
+
+async function savePYQ(){
+
+  const branch =
+    document
+      .getElementById("branch")
+      .value
+      .trim();
+
+
+  const semester =
+    Number(
+      document
+        .getElementById("semester")
+        .value
+    );
+
+
+  const subject =
+    document
+      .getElementById("subject")
+      .value
+      .trim();
+
+
+  const subjectCode =
+    document
+      .getElementById("subjectCode")
+      .value
+      .trim();
+
+
+  const year =
+    Number(
+      document
+        .getElementById("year")
+        .value
+    );
+
+
+  const examType =
+    document
+      .getElementById("examType")
+      .value;
+
+
+  const title =
+    document
+      .getElementById("title")
+      .value
+      .trim();
+
+
+  const file =
+    document
+      .getElementById("pdfFile")
+      .files[0];
+
+
+  /* VALIDATION */
+
+  if(
+    !branch ||
+    !semester ||
+    !subject ||
+    !year ||
+    !examType ||
+    !title
+  ){
+
+    showMessage(
+      "formMessage",
+      "❌ Please fill all required fields.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    file &&
+    file.type!=="application/pdf"
+  ){
+
+    showMessage(
+      "formMessage",
+      "❌ Only PDF files are allowed.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById(
+      "submitButton"
+    );
+
+
+  button.disabled=true;
+
+
+  try{
+
+    /* =========================
+       UPDATE EXISTING PYQ
+    ========================= */
+
+    if(editingId){
+
+      const oldPaper =
+        pyqs.find(
+          p =>
+            Number(p.id)===
+            Number(editingId)
+        );
+
+
+      if(!oldPaper){
+
+        throw new Error(
+          "PYQ record not found."
+        );
+
+      }
+
+
+      let filePath =
+        oldPaper.file_path;
+
+
+      /* =========================
+         REPLACE PDF ONLY IF
+         NEW FILE SELECTED
+      ========================= */
+
+      if(file){
+
+        const newPath =
+          createFilePath(
+            semester,
+            subjectCode,
+            year,
+            file.name
+          );
+
+
+        const uploadResponse =
+          await uploadPDF(
+            file,
+            newPath
+          );
+
+
+        if(!uploadResponse.ok){
+
+          const error =
+            await uploadResponse.text();
+
+          throw new Error(
+            "PDF upload failed: "+
+            error
+          );
+
+        }
+
+
+        filePath =
+          newPath;
+
+
+        /* Delete old file */
+
+        if(
+          oldPaper.file_path
+        ){
+
+          await deleteStorageFile(
+            oldPaper.file_path
+          );
+
+        }
+
+      }
+
+
+      /* =========================
+         IMPORTANT UPDATE
+         USING EXACT ID
+      ========================= */
+
+      const updateData = {
+
+        branch:branch,
+
+        semester:semester,
+
+        subject:subject,
+
+        subject_code:
+          subjectCode || null,
+
+        year:year,
+
+        exam_type:examType,
+
+        title:title,
+
+        file_path:filePath
+
+      };
+
+
+      const response =
+        await supabaseRequest(
+          "/rest/v1/pyqs?id=eq."+
+          encodeURIComponent(
+            editingId
+          ),
+          {
+            method:"PATCH",
+
+            headers:{
+              "Content-Type":
+                "application/json",
+
+              "Prefer":
+                "return=representation"
+            },
+
+            body:
+              JSON.stringify(
+                updateData
+              )
+          }
+        );
+
+
+      if(!response.ok){
+
+        const error =
+          await response.text();
+
+        throw new Error(
+          "Database update failed: "+
+          error
+        );
+
+      }
+
+
+      const updated =
+        await response.json();
+
+
+      if(
+        !updated ||
+        updated.length===0
+      ){
+
+        throw new Error(
+          "No record was updated. Check UPDATE permission in Supabase."
+        );
+
+      }
+
+
+      showMessage(
+        "formMessage",
+        "✅ PYQ updated successfully!",
+        "success"
+      );
+
+
+      cancelEdit();
+
+      await loadPYQs();
+
+
+      return;
+
+    }
+
+
+    /* =========================
+       NEW UPLOAD
+    ========================= */
+
+    if(!file){
+
+      showMessage(
+        "formMessage",
+        "❌ Please select a PDF file.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const filePath =
+      createFilePath(
+        semester,
+        subjectCode,
+        year,
+        file.name
+      );
+
+
+    const uploadResponse =
+      await uploadPDF(
+        file,
+        filePath
+      );
+
+
+    if(!uploadResponse.ok){
+
+      const error =
+        await uploadResponse.text();
+
+      throw new Error(
+        "PDF upload failed: "+
+        error
+      );
+
+    }
+
+
+    const insertData = {
+
+      branch:branch,
+
+      semester:semester,
+
+      subject:subject,
+
+      subject_code:
+        subjectCode || null,
+
+      year:year,
+
+      exam_type:examType,
+
+      title:title,
+
+      file_path:filePath
+
+    };
+
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs",
+        {
+          method:"POST",
+
+          headers:{
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+          },
+
+          body:
+            JSON.stringify(
+              insertData
+            )
+        }
+      );
+
+
+    if(!response.ok){
+
+      const error =
+        await response.text();
+
+      throw new Error(
+        "Database insert failed: "+
+        error
+      );
+
+    }
+
+
+    showMessage(
+      "formMessage",
+      "✅ PYQ uploaded successfully!",
+      "success"
+    );
+
+
+    clearForm();
+
+    await loadPYQs();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "formMessage",
+      "❌ "+error.message,
+      "error"
+    );
+
+  }finally{
+
+    button.disabled=false;
+
+  }
+
+}
+
+
+/* =========================
+   UPLOAD PDF
+========================= */
+
+async function uploadPDF(
+  file,
+  path
+){
+
+  return fetch(
+    SUPABASE_URL+
+    "/storage/v1/object/"+
+    encodeURIComponent(BUCKET)+
+    "/"+
+    path
+      .split("/")
+      .map(
+        encodeURIComponent
+      )
+      .join("/"),
+    {
+      method:"POST",
+
+      headers:{
+        "apikey":
+          SUPABASE_KEY,
+
+        "Authorization":
+          "Bearer "+
+          getAccessToken(),
+
+        "Content-Type":
+          "application/pdf",
+
+        "x-upsert":
+          "true"
+      },
+
+      body:file
+    }
+  );
+
+}
+
+
+/* =========================
+   DELETE STORAGE FILE
+========================= */
+
+async function deleteStorageFile(
+  path
+){
+
+  if(!path){
+    return;
+  }
+
+
+  try{
+
+    await fetch(
+      SUPABASE_URL+
+      "/storage/v1/object/"+
+      encodeURIComponent(BUCKET),
+      {
+        method:"DELETE",
+
+        headers:{
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer "+
+            getAccessToken(),
+
+          "Content-Type":
+            "application/json"
+        },
+
+        body:
+          JSON.stringify({
+            prefixes:[path]
+          })
+      }
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Old PDF could not be deleted:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================
+   DELETE PYQ
+========================= */
+
+async function deletePYQ(id){
+
+  const paper =
+    pyqs.find(
+      p =>
+        Number(p.id)===Number(id)
+    );
+
+
+  if(!paper){
+
+    alert(
+      "❌ PYQ not found."
+    );
+
+    return;
+
+  }
+
+
+  const confirmed =
+    confirm(
+      "Are you sure you want to delete this PYQ?\n\n"+
+      (paper.title || "Untitled PYQ")
+    );
+
+
+  if(!confirmed){
+
+    return;
+
+  }
+
+
+  try{
+
+    const response =
+      await supabaseRequest(
+        "/rest/v1/pyqs?id=eq."+
+        encodeURIComponent(id),
+        {
+          method:"DELETE",
+
+          headers:{
+            "Prefer":
+              "return=representation"
+          }
+        }
+      );
+
+
+    if(!response.ok){
+
+      const error =
+        await response.text();
+
+      throw new Error(
+        "Database delete failed: "+
+        error
+      );
+
+    }
+
+
+    if(
+      paper.file_path
+    ){
+
+      await deleteStorageFile(
+        paper.file_path
+      );
+
+    }
+
+
+    alert(
+      "✅ PYQ deleted successfully!"
+    );
+
+
+    await loadPYQs();
+
+
+  }catch(error){
+
+    console.error(error);
+
+    alert(
+      "❌ Could not delete PYQ\n\n"+
+      error.message
+    );
+
+  }
+
+}
+
+
+/* =========================
+   CREATE FILE PATH
+========================= */
+
+function createFilePath(
+  semester,
+  subjectCode,
+  year,
+  originalName
+){
+
+  const safeCode =
+    (subjectCode || "PYQ")
+      .replace(
+        /[^a-zA-Z0-9_-]/g,
+        "_"
+      );
+
+
+  const safeName =
+    originalName
+      .replace(
+        /\.pdf$/i,
+        ""
+      )
+      .replace(
+        /[^a-zA-Z0-9_-]/g,
+        "_"
+      );
+
+
+  const random =
+    Date.now();
+
+
+  return (
+    "semester-"+semester+
+    "/"+
+    safeCode+
+    "_"+
+    year+
+    "_"+
+    safeName+
+    "_"+
+    random+
+    ".pdf"
+  );
+
+}
+
+
+/* =========================
+   PDF URL
+========================= */
+
+function getPDFUrl(
+  path
+){
+
+  return (
+    SUPABASE_URL+
+    "/storage/v1/object/public/"+
+    encodeURIComponent(BUCKET)+
+    "/"+
+    path
+      .split("/")
+      .map(
+        encodeURIComponent
+      )
+      .join("/")
+  );
+
+}
+
+
+/* =========================
+   CLEAR FORM
+========================= */
+
+function clearForm(){
+
+  document
+    .getElementById("subject")
+    .value="";
+
+
+  document
+    .getElementById("subjectCode")
+    .value="";
+
+
+  document
+    .getElementById("year")
+    .value="";
+
+
+  document
+    .getElementById("examType")
+    .value="Mid Term";
+
+
+  document
+    .getElementById("title")
+    .value="";
+
+
+  document
+    .getElementById("pdfFile")
+    .value="";
+
+
+  document
+    .getElementById("currentFile")
+    .style.display="none";
+
+}
+
+
+/* =========================
+   ACCESS TOKEN
+========================= */
+
+function getAccessToken(){
+
+  return (
+    localStorage.getItem(
+      "outr_access_token"
+    ) ||
+    SUPABASE_KEY
+  );
+
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+function showMessage(
+  id,
+  text,
+  type
+){
+
+  const element =
+    document.getElementById(id);
+
+
+  element.textContent =
+    text;
+
+
+  element.className =
+    "message "+type;
+
+
+  element.style.display =
+    "block";
+
+}
+
+
+/* =========================
+   ORDINAL
+========================= */
 
 function ordinal(n){
 
-n=Number(n);
+  n=Number(n);
 
-if(n===1)return"1st";
-if(n===2)return"2nd";
-if(n===3)return"3rd";
+  if(n===1)return "1st";
+  if(n===2)return "2nd";
+  if(n===3)return "3rd";
 
-return n+"th";
-
-}
-
-function escapeHTML(text){
-
-return String(text)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
-
-}
-
-function showMessage(
-element,
-text,
-type
-){
-
-element.textContent=text;
-
-element.className=
-"message "+type;
-
-element.style.display="block";
+  return n+"th";
 
 }
 
 
 /* =========================
-   AUTO LOGIN
+   ESCAPE HTML
 ========================= */
 
-if(
-localStorage.getItem(
-"supabase_access_token"
-)
-){
+function escapeHTML(text){
 
-showDashboard();
+  return String(
+    text ?? ""
+  )
+  .replace(
+    /&/g,
+    "&amp;"
+  )
+  .replace(
+    /</g,
+    "&lt;"
+  )
+  .replace(
+    />/g,
+    "&gt;"
+  )
+  .replace(
+    /"/g,
+    "&quot;"
+  )
+  .replace(
+    /'/g,
+    "&#039;"
+  );
 
 }
+
+
+/* =========================
+   START
+========================= */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    const token =
+      localStorage.getItem(
+        "outr_access_token"
+      );
+
+
+    if(token){
+
+      showAdmin();
+
+    }
+
+  }
+);
 
 </script>
 
