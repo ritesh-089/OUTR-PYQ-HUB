@@ -20,17 +20,18 @@ body{
   min-height:100vh;
 }
 
+/* HEADER */
+
 header{
-  background:#ffffff;
-  padding:28px 20px 22px;
+  background:white;
+  padding:30px 20px 24px;
   text-align:center;
   border-bottom:1px solid #e5e7eb;
 }
 
 .logo{
-  font-size:28px;
+  font-size:30px;
   font-weight:800;
-  letter-spacing:.3px;
 }
 
 .subtitle{
@@ -39,47 +40,83 @@ header{
   font-size:14px;
 }
 
+/* CONTAINER */
+
 .container{
-  max-width:850px;
+  max-width:900px;
   margin:auto;
-  padding:20px;
+  padding:20px 16px 40px;
+}
+
+/* SEARCH */
+
+.search-box{
+  position:relative;
+  margin-bottom:24px;
 }
 
 .search{
   width:100%;
-  padding:15px 17px;
+  padding:16px 18px;
   border:1px solid #d7dce5;
-  border-radius:12px;
+  border-radius:13px;
+  background:white;
   font-size:16px;
   outline:none;
-  background:white;
-  margin-bottom:20px;
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
 .search:focus{
   border-color:#4f46e5;
 }
 
-.page-title{
-  font-size:22px;
-  margin-bottom:6px;
+/* HERO */
+
+.hero{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:24px;
+  box-shadow:0 4px 16px rgba(0,0,0,.05);
 }
 
-.page-subtitle{
+.hero h1{
+  font-size:23px;
+  margin-bottom:7px;
+}
+
+.hero p{
   color:#667085;
   font-size:14px;
-  margin-bottom:20px;
+  line-height:1.5;
 }
 
-.grid{
+/* SECTION */
+
+.section-title{
+  font-size:20px;
+  margin-bottom:14px;
+}
+
+.section-subtitle{
+  color:#667085;
+  font-size:13px;
+  margin-top:-8px;
+  margin-bottom:16px;
+}
+
+/* SEMESTERS */
+
+.semester-grid{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:12px;
 }
 
-.card{
+.semester{
   background:white;
-  border:1px solid #e8ebf0;
+  border:1px solid #e5e7eb;
   border-radius:15px;
   padding:18px;
   cursor:pointer;
@@ -87,72 +124,65 @@ header{
   box-shadow:0 3px 12px rgba(0,0,0,.04);
 }
 
-.card:hover{
+.semester:hover{
   transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
+  box-shadow:0 7px 18px rgba(0,0,0,.08);
 }
 
-.card-icon{
-  font-size:26px;
+.sem-icon{
+  font-size:25px;
   margin-bottom:10px;
 }
 
-.card-title{
+.sem-title{
   font-size:16px;
   font-weight:700;
 }
 
-.card-info{
+.sem-count{
   color:#667085;
-  font-size:13px;
+  font-size:12px;
   margin-top:6px;
 }
 
-.back{
-  border:none;
-  background:none;
-  padding:0;
-  margin-bottom:18px;
-  font-size:15px;
-  font-weight:600;
-  color:#4f46e5;
-  cursor:pointer;
+/* RECENT */
+
+.recent{
+  margin-top:28px;
 }
 
 .paper{
   background:white;
-  border-radius:15px;
-  padding:18px;
-  margin-bottom:12px;
-  border:1px solid #e8ebf0;
-  box-shadow:0 3px 12px rgba(0,0,0,.04);
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+  margin-bottom:11px;
 }
 
 .paper-title{
-  font-size:17px;
+  font-size:16px;
   font-weight:700;
-  margin-bottom:8px;
+  margin-bottom:7px;
 }
 
 .paper-info{
   color:#667085;
-  font-size:14px;
+  font-size:13px;
   line-height:1.7;
-  margin-bottom:14px;
 }
 
 .buttons{
   display:flex;
   gap:9px;
+  margin-top:12px;
 }
 
 .btn{
   text-decoration:none;
-  padding:11px 15px;
+  padding:10px 13px;
   border-radius:9px;
-  font-size:14px;
+  font-size:13px;
   font-weight:700;
-  text-align:center;
 }
 
 .view{
@@ -165,40 +195,124 @@ header{
   color:#3730a3;
 }
 
+/* PAGES */
+
+.page{
+  display:none;
+}
+
+.page.active{
+  display:block;
+}
+
+.back{
+  border:0;
+  background:none;
+  padding:0;
+  margin-bottom:18px;
+  color:#4f46e5;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.page-title{
+  font-size:23px;
+  margin-bottom:6px;
+}
+
+.page-subtitle{
+  color:#667085;
+  font-size:14px;
+  margin-bottom:20px;
+}
+
+/* SUBJECT / YEAR / EXAM */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:15px;
+  padding:18px;
+  cursor:pointer;
+  box-shadow:0 3px 12px rgba(0,0,0,.04);
+  transition:.15s;
+}
+
+.card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px rgba(0,0,0,.08);
+}
+
+.card-icon{
+  font-size:25px;
+  margin-bottom:10px;
+}
+
+.card-title{
+  font-size:16px;
+  font-weight:700;
+}
+
+.card-info{
+  color:#667085;
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* EMPTY */
+
 .empty{
+  background:white;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:30px;
   text-align:center;
-  padding:35px 15px;
   color:#667085;
 }
 
-.loading{
-  text-align:center;
-  padding:40px;
-  color:#667085;
+/* SEARCH RESULTS */
+
+.search-results{
+  margin-top:10px;
 }
+
+/* FOOTER */
 
 footer{
   text-align:center;
-  padding:35px 20px;
   color:#667085;
   font-size:13px;
+  padding:35px 20px;
+  border-top:1px solid #e5e7eb;
+  background:white;
 }
 
 footer strong{
   color:#172033;
 }
 
-.hidden{
-  display:none;
-}
+/* MOBILE */
 
 @media(max-width:600px){
+
+  .semester-grid,
   .grid{
     grid-template-columns:1fr;
   }
 
   .logo{
-    font-size:24px;
+    font-size:25px;
+  }
+
+  .hero h1{
+    font-size:21px;
   }
 
   .buttons{
@@ -206,7 +320,7 @@ footer strong{
   }
 
   .btn{
-    width:100%;
+    text-align:center;
   }
 }
 </style>
@@ -215,139 +329,251 @@ footer strong{
 <body>
 
 <header>
-  <div class="logo">OUTR PYQ HUB</div>
+
+  <div class="logo">
+    OUTR PYQ HUB
+  </div>
+
   <div class="subtitle">
     Previous Year Questions • OUTR Students
   </div>
+
 </header>
+
 
 <div class="container">
 
-  <!-- HOME -->
-  <section id="homePage">
+
+<!-- =========================
+     HOME
+========================= -->
+
+<section id="homePage" class="page active">
+
+  <div class="search-box">
 
     <input
       id="search"
       class="search"
       type="text"
-      placeholder="🔎 Search subject, year or exam..."
+      placeholder="🔎 Search subject, year, exam..."
       oninput="searchPYQ()"
     >
 
-    <h1 class="page-title">Civil Engineering</h1>
-
-    <p class="page-subtitle">
-      Select your semester
-    </p>
-
-    <div id="semesterGrid" class="grid"></div>
-
-  </section>
-
-
-  <!-- SUBJECT PAGE -->
-  <section id="subjectPage" class="hidden">
-
-    <button class="back" onclick="showHome()">
-      ← Back to Semesters
-    </button>
-
-    <h1 id="subjectTitle" class="page-title"></h1>
-
-    <p class="page-subtitle">
-      Select a subject
-    </p>
-
-    <div id="subjectGrid" class="grid"></div>
-
-  </section>
-
-
-  <!-- YEAR PAGE -->
-  <section id="yearPage" class="hidden">
-
-    <button class="back" onclick="showSubjects()">
-      ← Back to Subjects
-    </button>
-
-    <h1 id="yearTitle" class="page-title"></h1>
-
-    <p class="page-subtitle">
-      Select a year
-    </p>
-
-    <div id="yearGrid" class="grid"></div>
-
-  </section>
-
-
-  <!-- EXAM PAGE -->
-  <section id="examPage" class="hidden">
-
-    <button class="back" onclick="showYears()">
-      ← Back to Years
-    </button>
-
-    <h1 id="examTitle" class="page-title"></h1>
-
-    <p class="page-subtitle">
-      Select examination
-    </p>
-
-    <div id="examGrid" class="grid"></div>
-
-  </section>
-
-
-  <!-- PAPERS PAGE -->
-  <section id="paperPage" class="hidden">
-
-    <button class="back" onclick="showExams()">
-      ← Back to Exams
-    </button>
-
-    <h1 id="paperTitle" class="page-title"></h1>
-
-    <p class="page-subtitle">
-      Available question paper
-    </p>
-
-    <div id="paperList"></div>
-
-  </section>
-
-
-  <!-- SEARCH RESULTS -->
-  <section id="searchPage" class="hidden">
-
-    <button class="back" onclick="showHome()">
-      ← Back
-    </button>
-
-    <h1 class="page-title">Search Results</h1>
-
-    <p class="page-subtitle">
-      Matching PYQs
-    </p>
-
-    <div id="searchResults"></div>
-
-  </section>
-
-
-  <div id="loading" class="loading">
-    Loading PYQs...
   </div>
+
+
+  <div class="hero">
+
+    <h1>
+      🏗️ Civil Engineering
+    </h1>
+
+    <p>
+      Find previous year question papers
+      semester-wise, subject-wise and year-wise.
+    </p>
+
+  </div>
+
+
+  <h2 class="section-title">
+    📚 Select Semester
+  </h2>
+
+  <p class="section-subtitle">
+    Choose your semester to continue
+  </p>
+
+
+  <div id="semesterGrid" class="semester-grid"></div>
+
+
+  <div class="recent">
+
+    <h2 class="section-title">
+      🆕 Recently Added
+    </h2>
+
+    <div id="recentList"></div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     SUBJECT PAGE
+========================= -->
+
+<section id="subjectPage" class="page">
+
+  <button
+    class="back"
+    onclick="showPage('homePage')">
+
+    ← Back to Semesters
+
+  </button>
+
+  <h1
+    id="subjectTitle"
+    class="page-title">
+  </h1>
+
+  <p class="page-subtitle">
+    Select a subject
+  </p>
+
+  <div
+    id="subjectGrid"
+    class="grid">
+  </div>
+
+</section>
+
+
+<!-- =========================
+     YEAR PAGE
+========================= -->
+
+<section id="yearPage" class="page">
+
+  <button
+    class="back"
+    onclick="showPage('subjectPage')">
+
+    ← Back to Subjects
+
+  </button>
+
+  <h1
+    id="yearTitle"
+    class="page-title">
+  </h1>
+
+  <p class="page-subtitle">
+    Select a year
+  </p>
+
+  <div
+    id="yearGrid"
+    class="grid">
+  </div>
+
+</section>
+
+
+<!-- =========================
+     EXAM PAGE
+========================= -->
+
+<section id="examPage" class="page">
+
+  <button
+    class="back"
+    onclick="showPage('yearPage')">
+
+    ← Back to Years
+
+  </button>
+
+  <h1
+    id="examTitle"
+    class="page-title">
+  </h1>
+
+  <p class="page-subtitle">
+    Select examination
+  </p>
+
+  <div
+    id="examGrid"
+    class="grid">
+  </div>
+
+</section>
+
+
+<!-- =========================
+     PAPER PAGE
+========================= -->
+
+<section id="paperPage" class="page">
+
+  <button
+    class="back"
+    onclick="showPage('examPage')">
+
+    ← Back to Exams
+
+  </button>
+
+  <h1
+    id="paperTitle"
+    class="page-title">
+  </h1>
+
+  <p class="page-subtitle">
+    Available question papers
+  </p>
+
+  <div id="paperList"></div>
+
+</section>
+
+
+<!-- =========================
+     SEARCH PAGE
+========================= -->
+
+<section id="searchPage" class="page">
+
+  <button
+    class="back"
+    onclick="clearSearch()">
+
+    ← Back
+
+  </button>
+
+  <h1 class="page-title">
+    Search Results
+  </h1>
+
+  <p class="page-subtitle">
+    Matching question papers
+  </p>
+
+  <div
+    id="searchResults"
+    class="search-results">
+  </div>
+
+</section>
+
 
 </div>
 
+
 <footer>
-  <strong>Made by Ritesh Mallik</strong><br>
+
+  <strong>
+    Made by Ritesh Mallik
+  </strong>
+
+  <br>
+
   Civil • OUTR
+
 </footer>
 
 
 <script>
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://qxomkkmdpixjlbvyacjs.supabase.co";
@@ -358,272 +584,352 @@ const SUPABASE_KEY =
 const BUCKET =
 "PYQS Pdfs";
 
-let pyqs = [];
 
-let selectedSemester = null;
-let selectedSubject = null;
-let selectedYear = null;
-let selectedExam = null;
+/* =========================
+   DATA
+========================= */
+
+let pyqs=[];
+
+let selectedSemester=null;
+let selectedSubject=null;
+let selectedYear=null;
+let selectedExam=null;
 
 
-/* -----------------------------
-   LOAD DATABASE
------------------------------ */
+/* =========================
+   LOAD PYQS
+========================= */
 
 async function loadPYQs(){
 
   try{
 
-    const response = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/pyqs?select=*&order=year.desc",
-      {
-        headers:{
-          "apikey":SUPABASE_KEY,
-          "Authorization":"Bearer "+SUPABASE_KEY
+    const response =
+      await fetch(
+        SUPABASE_URL+
+        "/rest/v1/pyqs?select=*&order=year.desc,id.desc",
+        {
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer "+SUPABASE_KEY
+          }
         }
-      }
-    );
+      );
 
     if(!response.ok){
-      throw new Error("Database error");
+
+      throw new Error(
+        "Unable to load PYQs"
+      );
+
     }
 
-    pyqs = await response.json();
+    pyqs =
+      await response.json();
 
-    document.getElementById("loading").classList.add("hidden");
-
-    createSemesterCards();
+    createSemesters();
+    createRecent();
 
   }catch(error){
 
     console.error(error);
 
-    document.getElementById("loading").innerHTML =
-      "❌ Unable to load PYQs.<br>Please try again later.";
+    document
+      .getElementById("semesterGrid")
+      .innerHTML =
+      `<div class="empty">
+        ❌ Unable to load PYQs.
+      </div>`;
 
   }
 
 }
 
 
-/* -----------------------------
+/* =========================
    SEMESTERS
------------------------------ */
+========================= */
 
-function createSemesterCards(){
+function createSemesters(){
 
   const grid =
-    document.getElementById("semesterGrid");
+    document.getElementById(
+      "semesterGrid"
+    );
 
-  const semesters =
-    [...new Set(pyqs.map(p => p.semester))]
-    .sort((a,b)=>a-b);
+  let html="";
 
-  if(semesters.length===0){
+  for(let i=1;i<=8;i++){
 
-    grid.innerHTML =
-      `<div class="empty">No PYQs available yet.</div>`;
+    const count =
+      pyqs.filter(
+        p =>
+          Number(p.semester)===i
+      ).length;
 
-    return;
+    html += `
+
+      <div
+        class="semester"
+        onclick="openSemester(${i})">
+
+        <div class="sem-icon">
+          📚
+        </div>
+
+        <div class="sem-title">
+          ${ordinal(i)} Semester
+        </div>
+
+        <div class="sem-count">
+          ${count} PYQ${count===1?"":"s"}
+        </div>
+
+      </div>
+
+    `;
+
   }
 
-  grid.innerHTML = semesters.map(sem => `
-
-    <div class="card"
-         onclick="openSemester(${sem})">
-
-      <div class="card-icon">📚</div>
-
-      <div class="card-title">
-        ${getOrdinal(sem)} Semester
-      </div>
-
-      <div class="card-info">
-        ${countSemester(sem)} PYQ(s)
-      </div>
-
-    </div>
-
-  `).join("");
+  grid.innerHTML=html;
 
 }
 
 
-/* -----------------------------
-   SUBJECTS
------------------------------ */
+/* =========================
+   OPEN SEMESTER
+========================= */
 
 function openSemester(semester){
 
-  selectedSemester = semester;
-
-  hideAll();
-
-  document
-    .getElementById("subjectPage")
-    .classList.remove("hidden");
+  selectedSemester=semester;
 
   document
     .getElementById("subjectTitle")
     .textContent =
-      getOrdinal(semester) + " Semester";
+      ordinal(semester)+" Semester";
 
   const subjects =
-    [...new Set(
-      pyqs
-      .filter(p => Number(p.semester) === Number(semester))
-      .map(p => p.subject)
-    )]
-    .sort();
+    [
+      ...new Set(
+        pyqs
+        .filter(
+          p =>
+            Number(p.semester)===semester
+        )
+        .map(p=>p.subject)
+      )
+    ].sort();
 
   const grid =
-    document.getElementById("subjectGrid");
+    document.getElementById(
+      "subjectGrid"
+    );
 
-  grid.innerHTML = subjects.map(subject => `
+  if(subjects.length===0){
 
-    <div class="card"
-         onclick='openSubject(${JSON.stringify(subject)})'>
+    grid.innerHTML =
+      `<div class="empty">
+        📭 No PYQs available for this semester yet.
+      </div>`;
 
-      <div class="card-icon">📖</div>
+  }else{
 
-      <div class="card-title">
-        ${escapeHTML(subject)}
-      </div>
+    grid.innerHTML =
+      subjects.map(
+        subject => `
 
-      <div class="card-info">
-        ${countSubject(subject)} PYQ(s)
-      </div>
+          <div
+            class="card"
+            onclick='openSubject(${JSON.stringify(subject)})'>
 
-    </div>
+            <div class="card-icon">
+              📖
+            </div>
 
-  `).join("");
+            <div class="card-title">
+              ${escapeHTML(subject)}
+            </div>
+
+            <div class="card-info">
+              ${countSubject(subject)} PYQ(s)
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+  }
+
+  showPage("subjectPage");
 
 }
 
+
+/* =========================
+   SUBJECT
+========================= */
 
 function openSubject(subject){
 
-  selectedSubject = subject;
-
-  hideAll();
-
-  document
-    .getElementById("yearPage")
-    .classList.remove("hidden");
+  selectedSubject=subject;
 
   document
     .getElementById("yearTitle")
-    .textContent =
-      subject;
+    .textContent=subject;
 
   const years =
-    [...new Set(
-      pyqs
-      .filter(p =>
-        Number(p.semester) === Number(selectedSemester) &&
-        p.subject === selectedSubject
+    [
+      ...new Set(
+        pyqs
+        .filter(
+          p =>
+            Number(p.semester)===
+              Number(selectedSemester) &&
+            p.subject===selectedSubject
+        )
+        .map(p=>Number(p.year))
       )
-      .map(p => Number(p.year))
-    )]
-    .sort((a,b)=>b-a);
+    ]
+    .sort(
+      (a,b)=>b-a
+    );
 
   const grid =
-    document.getElementById("yearGrid");
+    document.getElementById(
+      "yearGrid"
+    );
 
-  grid.innerHTML = years.map(year => `
+  if(years.length===0){
 
-    <div class="card"
-         onclick="openYear(${year})">
+    grid.innerHTML =
+      `<div class="empty">
+        📭 No years available.
+      </div>`;
 
-      <div class="card-icon">📅</div>
+  }else{
 
-      <div class="card-title">
-        ${year}
-      </div>
+    grid.innerHTML =
+      years.map(
+        year => `
 
-      <div class="card-info">
-        View available papers
-      </div>
+          <div
+            class="card"
+            onclick="openYear(${year})">
 
-    </div>
+            <div class="card-icon">
+              📅
+            </div>
 
-  `).join("");
+            <div class="card-title">
+              ${year}
+            </div>
+
+            <div class="card-info">
+              View available papers
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+  }
+
+  showPage("yearPage");
 
 }
 
 
-/* -----------------------------
-   YEARS
------------------------------ */
+/* =========================
+   YEAR
+========================= */
 
 function openYear(year){
 
-  selectedYear = year;
-
-  hideAll();
-
-  document
-    .getElementById("examPage")
-    .classList.remove("hidden");
+  selectedYear=year;
 
   document
     .getElementById("examTitle")
     .textContent =
-      selectedSubject + " • " + year;
+      selectedSubject+
+      " • "+
+      year;
 
   const exams =
-    [...new Set(
-      pyqs
-      .filter(p =>
-        Number(p.semester) === Number(selectedSemester) &&
-        p.subject === selectedSubject &&
-        Number(p.year) === Number(selectedYear)
+    [
+      ...new Set(
+        pyqs
+        .filter(
+          p =>
+            Number(p.semester)===
+              Number(selectedSemester) &&
+            p.subject===selectedSubject &&
+            Number(p.year)===
+              Number(selectedYear)
+        )
+        .map(p=>p.exam_type)
       )
-      .map(p => p.exam_type)
-    )]
-    .sort();
+    ];
 
   const grid =
-    document.getElementById("examGrid");
+    document.getElementById(
+      "examGrid"
+    );
 
-  grid.innerHTML = exams.map(exam => `
+  if(exams.length===0){
 
-    <div class="card"
-         onclick='openExam(${JSON.stringify(exam)})'>
+    grid.innerHTML =
+      `<div class="empty">
+        📭 No examination papers available.
+      </div>`;
 
-      <div class="card-icon">
-        ${exam === "Mid Term" ? "📝" : "📄"}
-      </div>
+  }else{
 
-      <div class="card-title">
-        ${escapeHTML(exam)}
-      </div>
+    grid.innerHTML =
+      exams.map(
+        exam => `
 
-      <div class="card-info">
-        ${selectedYear}
-      </div>
+          <div
+            class="card"
+            onclick='openExam(${JSON.stringify(exam)})'>
 
-    </div>
+            <div class="card-icon">
+              ${exam==="Mid Term"
+                ?"📝"
+                :"📄"}
+            </div>
 
-  `).join("");
+            <div class="card-title">
+              ${escapeHTML(exam)}
+            </div>
+
+            <div class="card-info">
+              ${year}
+            </div>
+
+          </div>
+
+        `
+      ).join("");
+
+  }
+
+  showPage("examPage");
 
 }
 
 
-/* -----------------------------
+/* =========================
    EXAM
------------------------------ */
+========================= */
 
 function openExam(exam){
 
-  selectedExam = exam;
-
-  hideAll();
-
-  document
-    .getElementById("paperPage")
-    .classList.remove("hidden");
+  selectedExam=exam;
 
   document
     .getElementById("paperTitle")
@@ -631,73 +937,168 @@ function openExam(exam){
       selectedSubject;
 
   const papers =
-    pyqs.filter(p =>
-      Number(p.semester) === Number(selectedSemester) &&
-      p.subject === selectedSubject &&
-      Number(p.year) === Number(selectedYear) &&
-      p.exam_type === selectedExam
+    pyqs.filter(
+      p =>
+        Number(p.semester)===
+          Number(selectedSemester) &&
+        p.subject===selectedSubject &&
+        Number(p.year)===
+          Number(selectedYear) &&
+        p.exam_type===selectedExam
     );
 
-  const list =
-    document.getElementById("paperList");
+  displayPapers(
+    papers,
+    document.getElementById(
+      "paperList"
+    )
+  );
 
-  list.innerHTML = papers.map(paper => {
-
-    const url = getPDFUrl(paper.file_path);
-
-    return `
-
-      <div class="paper">
-
-        <div class="paper-title">
-          📄 ${escapeHTML(paper.title)}
-        </div>
-
-        <div class="paper-info">
-
-          🏗️ ${escapeHTML(paper.branch)}
-          <br>
-
-          📚 ${getOrdinal(paper.semester)} Semester
-          <br>
-
-          📝 ${escapeHTML(paper.exam_type)}
-          • ${paper.year}
-
-        </div>
-
-        <div class="buttons">
-
-          <a
-            class="btn view"
-            href="${url}"
-            target="_blank"
-          >
-            📖 View PDF
-          </a>
-
-          <a
-            class="btn download"
-            href="${url}"
-            download
-          >
-            ⬇️ Download
-          </a>
-
-        </div>
-
-      </div>
-
-    `;
-
-  }).join("");
+  showPage("paperPage");
 
 }
 
 
-/* -----------------------------
+/* =========================
+   RECENT PAPERS
+========================= */
+
+function createRecent(){
+
+  const list =
+    document.getElementById(
+      "recentList"
+    );
+
+  const recent =
+    pyqs.slice(0,5);
+
+  if(recent.length===0){
+
+    list.innerHTML =
+      `<div class="empty">
+        No PYQs added yet.
+      </div>`;
+
+    return;
+  }
+
+  displayPapers(
+    recent,
+    list
+  );
+
+}
+
+
+/* =========================
+   DISPLAY PAPERS
+========================= */
+
+function displayPapers(
+  papers,
+  element
+){
+
+  if(papers.length===0){
+
+    element.innerHTML =
+      `<div class="empty">
+        📭 No papers found.
+      </div>`;
+
+    return;
+
+  }
+
+  element.innerHTML =
+    papers.map(
+      paper => {
+
+        const url =
+          getPDFUrl(
+            paper.file_path
+          );
+
+        return `
+
+          <div class="paper">
+
+            <div class="paper-title">
+              📄
+              ${escapeHTML(
+                paper.title
+              )}
+            </div>
+
+            <div class="paper-info">
+
+              🏗️
+              ${escapeHTML(
+                paper.branch
+              )}
+
+              <br>
+
+              📚
+              ${ordinal(
+                paper.semester
+              )}
+              Semester
+
+              <br>
+
+              📖
+              ${escapeHTML(
+                paper.subject
+              )}
+
+              <br>
+
+              📝
+              ${escapeHTML(
+                paper.exam_type
+              )}
+              •
+              ${paper.year}
+
+            </div>
+
+            <div class="buttons">
+
+              <a
+                class="btn view"
+                href="${url}"
+                target="_blank">
+
+                📖 View PDF
+
+              </a>
+
+              <a
+                class="btn download"
+                href="${url}"
+                download>
+
+                ⬇️ Download
+
+              </a>
+
+            </div>
+
+          </div>
+
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* =========================
    SEARCH
------------------------------ */
+========================= */
 
 function searchPYQ(){
 
@@ -710,224 +1111,135 @@ function searchPYQ(){
 
   if(!query){
 
-    showHome();
+    showPage("homePage");
+    createRecent();
+
     return;
+
   }
-
-  hideAll();
-
-  document
-    .getElementById("searchPage")
-    .classList.remove("hidden");
 
   const results =
-    pyqs.filter(p => {
+    pyqs.filter(
+      p => {
 
-      const text = (
+        const text =
+          (
+            p.branch+
+            " "+
+            p.subject+
+            " "+
+            (p.subject_code||"")+
+            " "+
+            p.exam_type+
+            " "+
+            p.year+
+            " "+
+            p.semester+
+            " "+
+            p.title
+          ).toLowerCase();
 
-        p.branch + " " +
-        p.subject + " " +
-        p.subject_code + " " +
-        p.exam_type + " " +
-        p.year + " " +
-        p.semester + " " +
-        p.title
+        return text.includes(query);
 
-      ).toLowerCase();
+      }
+    );
 
-      return text.includes(query);
+  displayPapers(
+    results,
+    document.getElementById(
+      "searchResults"
+    )
+  );
 
-    });
-
-  const box =
-    document.getElementById("searchResults");
-
-  if(results.length===0){
-
-    box.innerHTML =
-      `<div class="empty">
-        📭 No matching PYQs found.
-      </div>`;
-
-    return;
-  }
-
-  box.innerHTML =
-    results.map(paper => {
-
-      const url =
-        getPDFUrl(paper.file_path);
-
-      return `
-
-        <div class="paper">
-
-          <div class="paper-title">
-            📄 ${escapeHTML(paper.title)}
-          </div>
-
-          <div class="paper-info">
-
-            🏗️ ${escapeHTML(paper.branch)}
-            <br>
-
-            📚 ${getOrdinal(paper.semester)}
-            Semester
-            <br>
-
-            📖 ${escapeHTML(paper.subject)}
-            <br>
-
-            📝 ${escapeHTML(paper.exam_type)}
-            • ${paper.year}
-
-          </div>
-
-          <div class="buttons">
-
-            <a
-              class="btn view"
-              href="${url}"
-              target="_blank"
-            >
-              📖 View PDF
-            </a>
-
-            <a
-              class="btn download"
-              href="${url}"
-              download
-            >
-              ⬇️ Download
-            </a>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
+  showPage("searchPage");
 
 }
 
 
-/* -----------------------------
+/* =========================
    NAVIGATION
------------------------------ */
+========================= */
 
-function hideAll(){
+function showPage(id){
 
-  [
-    "homePage",
-    "subjectPage",
-    "yearPage",
-    "examPage",
-    "paperPage",
-    "searchPage"
-  ].forEach(id => {
+  document
+    .querySelectorAll(".page")
+    .forEach(
+      page =>
+        page.classList.remove(
+          "active"
+        )
+    );
 
-    document
-      .getElementById(id)
-      .classList.add("hidden");
+  document
+    .getElementById(id)
+    .classList.add("active");
 
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
   });
 
 }
 
-function showHome(){
 
-  hideAll();
-
-  document
-    .getElementById("homePage")
-    .classList.remove("hidden");
+function clearSearch(){
 
   document
     .getElementById("search")
-    .value = "";
+    .value="";
 
-}
-
-function showSubjects(){
-
-  hideAll();
-
-  document
-    .getElementById("subjectPage")
-    .classList.remove("hidden");
-
-}
-
-function showYears(){
-
-  hideAll();
-
-  document
-    .getElementById("yearPage")
-    .classList.remove("hidden");
-
-}
-
-function showExams(){
-
-  hideAll();
-
-  document
-    .getElementById("examPage")
-    .classList.remove("hidden");
+  showPage("homePage");
 
 }
 
 
-/* -----------------------------
+/* =========================
    HELPERS
------------------------------ */
-
-function countSemester(semester){
-
-  return pyqs.filter(
-    p => Number(p.semester) === Number(semester)
-  ).length;
-
-}
+========================= */
 
 function countSubject(subject){
 
   return pyqs.filter(
     p =>
-      Number(p.semester) === Number(selectedSemester) &&
-      p.subject === subject
+      Number(p.semester)===
+        Number(selectedSemester) &&
+      p.subject===subject
   ).length;
 
 }
 
-function getOrdinal(number){
 
-  number = Number(number);
+function ordinal(n){
 
-  if(number === 1) return "1st";
-  if(number === 2) return "2nd";
-  if(number === 3) return "3rd";
+  n=Number(n);
 
-  return number + "th";
+  if(n===1)return"1st";
+  if(n===2)return"2nd";
+  if(n===3)return"3rd";
+
+  return n+"th";
 
 }
+
 
 function getPDFUrl(path){
 
   return (
-    SUPABASE_URL +
-    "/storage/v1/object/public/" +
-    encodeURIComponent(BUCKET) +
-    "/" +
+    SUPABASE_URL+
+    "/storage/v1/object/public/"+
+    encodeURIComponent(BUCKET)+
+    "/"+
     path
       .split("/")
-      .map(encodeURIComponent)
+      .map(
+        encodeURIComponent
+      )
       .join("/")
   );
 
 }
+
 
 function escapeHTML(text){
 
@@ -941,7 +1253,9 @@ function escapeHTML(text){
 }
 
 
-/* START */
+/* =========================
+   START
+========================= */
 
 loadPYQs();
 
